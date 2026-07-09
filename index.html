@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vela - Literatura Fantástica & Magia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="logo.png" id="logo-btn" alt="Bella Vela Logo" class="logo-img">
+                <span class="brand-name">Bella Vela</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Velas <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content-wrapper">
+                            <div class="dropdown-column">
+                                <h3>🏰 Literatura Fantástica</h3>
+                                <ul>
+                                    <li><a href="#">Escuela de Magia</a></li>
+                                    <li><a href="#">Biblioteca</a></li>
+                                    <li><a href="#">Pociones</a></li>
+                                    <li><a href="#">Bosque Prohibido</a></li>
+                                    <li><a href="#">Sala Común</a></li>
+                                    <li><a href="#">Hechizos</a></li>
+                                    <li><a href="#">Torneo de Magia</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h3>🧛 Sobrenatural</h3>
+                                <ul>
+                                    <li><a href="#">Vampiro</a></li>
+                                    <li><a href="#">Hombre Lobo</a></li>
+                                    <li><a href="#">Fantasma</a></li>
+                                    <li><a href="#">Bruja</a></li>
+                                    <li><a href="#">Demonio</a></li>
+                                    <li><a href="#">Ángel</a></li>
+                                    <li><a href="#">Zombie</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h3>🧚 Reino Feérico</h3>
+                                <ul>
+                                    <li><a href="#">Hada</a></li>
+                                    <li><a href="#">Duende</a></li>
+                                    <li><a href="#">Elfo</a></li>
+                                    <li><a href="#">Ninfa</a></li>
+                                    <li><a href="#">Sirena</a></li>
+                                    <li><a href="#">Unicornio</a></li>
+                                    <li><a href="#">Dragón</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h3>🔥 Mitología</h3>
+                                <ul>
+                                    <li><a href="#">Fénix</a></li>
+                                    <li><a href="#">Pegaso</a></li>
+                                    <li><a href="#">Grifo</a></li>
+                                    <li><a href="#">Sabueso / Can Cerbero</a></li>
+                                    <li><a href="#">Hidra</a></li>
+                                    <li><a href="#">Minotauro</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Insumos</a></li>
+                    <li><a href="#">Talleres</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="carousel-section">
+        <div class="carousel-container" id="carousel-images">
+            <div class="slide active" style="background-image: url('ejemplo.jpg');"></div>
+        </div>
+    </section>
+
+    <main class="catalog-container">
+        <h2 class="section-title">Nuestras Creaciones Mágicas</h2>
+        <div class="products-grid" id="products-grid">
+            </div>
+    </main>
+
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal-btn">&times;</span>
+            <h2>Panel de Control Mágico</h2>
+            
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchTab('tab-productos')">Productos</button>
+                <button class="tab-btn" onclick="switchTab('tab-carrusel')">Carrusel</button>
+            </div>
+
+            <div id="tab-productos" class="tab-panel active">
+                <h3>Agregar / Modificar Producto</h3>
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <input type="text" id="prod-name" placeholder="Nombre del Producto" required>
+                    <textarea id="prod-desc" placeholder="Descripción de la esencia o magia..." required></textarea>
+                    <input type="number" id="prod-price" placeholder="Precio ($)" required>
+                    <input type="file" id="prod-img" accept="image/*">
+                    <button type="submit" class="btn-save">Guardar Producto</button>
+                </form>
+                <div id="admin-products-list"></div>
+            </div>
+
+            <div id="tab-carrusel" class="tab-panel">
+                <h3>Imágenes del Carrusel</h3>
+                <form id="carousel-form">
+                    <input type="file" id="carousel-img-input" accept="image/*" required>
+                    <button type="submit" class="btn-save">Añadir al Carrusel</button>
+                </form>
+                <div id="admin-carousel-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>Bella Vela Uy</h4>
+                <p>Hecho con amor y magia pura ✨</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/091330582" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bella Vela. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
