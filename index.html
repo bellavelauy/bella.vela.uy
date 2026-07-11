@@ -2,305 +2,690 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bella Vela - Universo Místico & Artesanal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Bella Vela 🌻 Creaciones Artesanales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-magic: #7b2cbf;
-            --accent-soft: #e0aaff;
-            --bg-cream: #fffcf2;
-            --dark-text: #240046;
-            --white: #ffffff;
-            --shadow: rgba(123,44,191,0.15);
-            --transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            --gold:        #F5A623;
+            --gold-dark:   #D4881A;
+            --gold-light:  #FFD966;
+            --cream:       #FFFDE7;
+            --cream-dark:  #FFF8C4;
+            --brown:       #3D3018;
+            --brown-mid:   #7A5C1E;
+            --white:       #FFFFFF;
+            --shadow:      rgba(213,140,30,0.18);
+            --shadow-dark: rgba(61,48,24,0.15);
+            --transition:  all 0.35s cubic-bezier(0.4,0,0.2,1);
         }
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
-        body{background-color:var(--bg-cream);color:var(--dark-text);overflow-x:hidden;}
-        header{background-color:var(--white);box-shadow:0 4px 20px var(--shadow);position:sticky;top:0;z-index:1000;}
-        .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:0 auto;padding:12px 20px;}
-        .logo-container{display:flex;align-items:center;gap:12px;cursor:pointer;}
-        .logo-img{width:50px;height:50px;background:linear-gradient(135deg,var(--accent-soft),var(--primary-magic));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--white);box-shadow:0 4px 10px rgba(123,44,191,0.3);transition:var(--transition);overflow:hidden;}
-        .logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-        .logo-img:active{transform:scale(0.85) rotate(-20deg);}
-        .brand-name{font-size:1.6rem;font-weight:800;color:var(--primary-magic);letter-spacing:1px;}
-        .main-nav .nav-links{display:flex;list-style:none;gap:15px;align-items:center;}
-        .nav-links>li{position:relative;}
-        .nav-links a{text-decoration:none;color:var(--dark-text);font-weight:600;padding:10px 14px;border-radius:20px;display:flex;align-items:center;gap:6px;transition:var(--transition);cursor:pointer;}
-        .nav-links a:hover,.nav-links .active-nav{color:var(--primary-magic);background-color:rgba(224,170,255,0.3);}
-        .dropdown-menu{display:none;position:absolute;top:100%;left:0;background-color:var(--white);box-shadow:0 8px 24px rgba(0,0,0,0.12);border-radius:10px;padding:10px 0;min-width:220px;list-style:none;border-top:3px solid var(--primary-magic);animation:slideUp 0.3s ease;}
-        .dropdown-menu li{position:relative;}
-        .dropdown-menu a{border-radius:0;padding:10px 20px;font-weight:500;}
-        .dropdown-menu a:hover{background-color:#f6f0ff;}
-        .dropdown-menu li:hover>.submenu-right{display:block;}
-        .submenu-right{display:none;position:absolute;top:0;left:100%;background-color:var(--white);box-shadow:0 8px 24px rgba(0,0,0,0.12);border-radius:10px;padding:10px 0;min-width:200px;list-style:none;border-left:3px solid var(--accent-soft);}
-        .mega-dropdown-content{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background-color:var(--white);box-shadow:0 10px 35px rgba(36,0,70,0.15);border-radius:12px;padding:25px;width:850px;grid-template-columns:repeat(3,1fr);gap:20px;border-top:5px solid var(--primary-magic);animation:slideUp 0.3s ease;}
-        .nav-links li:hover .dropdown-menu,.nav-links li:hover .mega-dropdown-content{display:grid;}
-        .nav-links li:hover>.dropdown-menu{display:block;}
-        .mega-col h3{font-size:1rem;color:var(--primary-magic);margin-bottom:12px;border-bottom:2px solid var(--accent-soft);padding-bottom:6px;display:flex;align-items:center;gap:8px;}
-        .mega-col ul{list-style:none;max-height:250px;overflow-y:auto;padding-right:5px;}
-        .mega-col ul::-webkit-scrollbar{width:4px;}
-        .mega-col ul::-webkit-scrollbar-thumb{background:var(--accent-soft);border-radius:4px;}
-        .mega-col ul li a{font-size:0.88rem;font-weight:normal;padding:5px 8px;border-radius:6px;}
-        .view-section{display:none;animation:fadeIn 0.6s ease forwards;min-height:70vh;}
-        .view-section.active-view{display:block;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes slideUp{from{opacity:0;transform:translate3d(0,10px,0);}to{opacity:1;transform:translate3d(0,0,0);}}
-        .carousel-section{width:100%;height:420px;overflow:hidden;position:relative;background:linear-gradient(135deg,#e5dbff,#fff5f5);}
-        .carousel-container{width:100%;height:100%;}
-        .slide{width:100%;height:100%;background-size:cover;background-position:center;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:var(--white);text-shadow:0 4px 12px rgba(36,0,70,0.6);padding:20px;}
-        .slide.active{display:flex;animation:fadeIn 0.8s ease;}
-        .slide h2{font-size:2.8rem;margin-bottom:10px;}
-        .slide p{font-size:1.3rem;font-weight:500;}
-        .container-box{max-width:1000px;margin:40px auto;background:var(--white);padding:40px;border-radius:16px;box-shadow:0 10px 30px var(--shadow);border-left:6px solid var(--primary-magic);}
-        .page-title{color:var(--primary-magic);font-size:2.2rem;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
-        .info-p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;color:#3d1466;}
-        .grid-two-cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:25px;}
-        .sub-box{background:#fdfaff;border:1px dashed var(--accent-soft);padding:25px;border-radius:12px;transition:var(--transition);}
-        .sub-box:hover{transform:scale(1.02);background:#f6efff;}
-        .sub-box h3{color:var(--primary-magic);margin-bottom:15px;font-size:1.3rem;}
-        .magic-list{list-style:none;margin-top:10px;}
-        .magic-list li{padding:6px 0;display:flex;align-items:center;gap:10px;font-size:1rem;}
-        .magic-list li::before{content:"✨";}
-        .catalog-container{max-width:1200px;margin:40px auto;padding:0 20px;}
-        .section-title{color:var(--primary-magic);font-size:1.8rem;font-weight:700;margin-bottom:30px;display:flex;align-items:center;gap:10px;}
-        .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:30px;}
-        .product-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px var(--shadow);transition:var(--transition);cursor:pointer;}
-        .product-card:hover{transform:translateY(-8px);box-shadow:0 12px 28px rgba(123,44,191,0.25);}
-        .product-img-placeholder{width:100%;height:230px;background:linear-gradient(45deg,#f3e8ff,#eddfff);display:flex;align-items:center;justify-content:center;color:var(--primary-magic);font-size:3.5rem;}
-        .product-img-placeholder img{width:100%;height:100%;object-fit:cover;}
-        .product-info{padding:20px;}
-        .product-title{font-size:1.2rem;margin-bottom:8px;font-weight:700;}
-        .product-desc{font-size:0.9rem;color:#66527a;margin-bottom:12px;height:40px;overflow:hidden;}
-        .product-price{font-size:1.3rem;font-weight:bold;color:var(--primary-magic);}
-        .product-badge{display:inline-block;font-size:0.75rem;background:var(--accent-soft);color:var(--dark-text);padding:2px 10px;border-radius:20px;margin-bottom:8px;}
-        .empty-state{text-align:center;padding:60px 20px;color:#9b7bb0;font-size:1.1rem;}
-        .empty-icon{font-size:4rem;margin-bottom:15px;}
-        .loading-spinner{text-align:center;padding:40px;color:var(--primary-magic);font-size:1.1rem;}
-        .spinner{display:inline-block;width:40px;height:40px;border:4px solid var(--accent-soft);border-top-color:var(--primary-magic);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:10px;}
-        @keyframes spin{to{transform:rotate(360deg);}}
-        /* MODAL ADMIN */
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(24,0,46,0.7);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-        .modal-content{background:var(--white);padding:35px;border-radius:16px;width:90%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);}
-        .close-modal{float:right;font-size:32px;cursor:pointer;color:#aaa;transition:0.2s;}
-        .close-modal:hover{color:var(--primary-magic);}
-        .modal-content input,.modal-content textarea,.modal-content select{width:100%;margin-bottom:14px;padding:12px;border:1px solid var(--accent-soft);border-radius:8px;font-size:1rem;background:#fdfaff;}
-        .modal-content input:focus,.modal-content textarea:focus,.modal-content select:focus{outline:2px solid var(--primary-magic);}
-        .btn-save{background:linear-gradient(135deg,var(--primary-magic),#9d4edd);color:white;border:none;padding:14px;width:100%;cursor:pointer;border-radius:8px;font-weight:bold;font-size:1.1rem;box-shadow:0 4px 15px rgba(123,44,191,0.3);transition:var(--transition);}
-        .btn-save:hover{opacity:0.9;transform:translateY(-1px);}
-        .admin-tabs{display:flex;gap:10px;margin-bottom:20px;}
-        .admin-tab{flex:1;padding:10px;border:2px solid var(--accent-soft);background:transparent;border-radius:8px;cursor:pointer;font-weight:600;color:var(--primary-magic);transition:var(--transition);}
-        .admin-tab.active{background:var(--primary-magic);color:white;border-color:var(--primary-magic);}
-        .admin-panel{display:none;}
-        .admin-panel.active{display:block;}
-        .upload-progress{display:none;margin:10px 0;}
-        .progress-bar{height:6px;background:#eee;border-radius:3px;overflow:hidden;}
-        .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-magic),var(--accent-soft));width:0%;transition:width 0.3s;}
-        .logo-preview-img{width:80px;height:80px;border-radius:50%;object-fit:cover;display:none;margin:10px auto;border:3px solid var(--accent-soft);}
-        .img-preview-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;}
-        .img-preview-thumb{width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid var(--accent-soft);}
-        .product-item-admin{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #eee;border-radius:8px;margin-bottom:8px;}
-        .product-item-admin img{width:50px;height:50px;object-fit:cover;border-radius:6px;}
-        .product-item-admin .info{flex:1;}
-        .product-item-admin .info strong{display:block;font-size:0.95rem;}
-        .product-item-admin .info span{font-size:0.8rem;color:#888;}
-        .btn-delete{background:#ff4d6d;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.8rem;}
-        /* MODAL PRODUCTO DETALLE */
-        .product-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(24,0,46,0.75);z-index:3000;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
-        .product-modal.open{display:flex;}
-        .product-modal-inner{background:var(--white);border-radius:20px;width:92%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.35);display:grid;grid-template-columns:1fr 1fr;position:relative;}
-        .prod-gallery{padding:30px;background:#f9f0ff;border-radius:20px 0 0 20px;}
-        .prod-main-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;margin-bottom:12px;}
-        .prod-main-img-placeholder{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e9d8ff,#f9f0ff);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:5rem;margin-bottom:12px;}
-        .prod-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
-        .prod-thumb{width:60px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:0.2s;}
-        .prod-thumb.active,.prod-thumb:hover{border-color:var(--primary-magic);}
-        .prod-details{padding:35px;display:flex;flex-direction:column;justify-content:space-between;}
-        .prod-badge-cat{display:inline-block;background:var(--accent-soft);color:var(--dark-text);font-size:0.75rem;padding:4px 12px;border-radius:20px;margin-bottom:10px;font-weight:600;}
-        .prod-name{font-size:1.8rem;font-weight:800;color:var(--dark-text);margin-bottom:8px;}
-        .prod-price-big{font-size:2rem;font-weight:800;color:var(--primary-magic);margin-bottom:16px;}
-        .prod-desc-full{font-size:1rem;color:#5a3a7a;line-height:1.7;margin-bottom:20px;flex:1;}
-        .prod-stock-info{font-size:0.9rem;color:#888;margin-bottom:16px;}
-        .prod-stock-info.ok{color:#2e7d32;font-weight:600;}
-        .prod-stock-info.low{color:#e65100;font-weight:600;}
-        .qty-selector{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-        .qty-selector label{font-weight:600;color:var(--dark-text);}
-        .qty-btn{width:36px;height:36px;border-radius:50%;border:2px solid var(--primary-magic);background:transparent;color:var(--primary-magic);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;transition:0.2s;}
-        .qty-btn:hover{background:var(--primary-magic);color:white;}
-        .qty-num{font-size:1.3rem;font-weight:700;min-width:30px;text-align:center;}
-        .btn-comprar{background:linear-gradient(135deg,#25d366,#128c7e);color:white;border:none;padding:16px 24px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;transition:var(--transition);}
-        .btn-comprar:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,0.4);}
-        .prod-modal-close{position:absolute;top:15px;right:20px;font-size:2rem;cursor:pointer;color:#888;z-index:10;line-height:1;background:white;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
-        .souvenir-cta{background:linear-gradient(135deg,#f3e8ff,#ffe8f5);border-radius:20px;padding:50px;text-align:center;margin-top:30px;}
-        .souvenir-cta p{font-size:1.5rem;font-weight:700;color:var(--dark-text);margin-bottom:20px;}
-        footer{background-color:var(--dark-text);color:var(--white);padding:45px 20px 25px;margin-top:60px;border-top:4px solid var(--accent-soft);}
-        .footer-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;}
-        .footer-socials{display:flex;gap:20px;}
-        .social-icon{color:var(--accent-soft);font-size:1.8rem;transition:var(--transition);}
-        .social-icon:hover{transform:scale(1.25) rotate(10deg);color:var(--white);}
-        .footer-bottom{text-align:center;margin-top:35px;font-size:0.85rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;color:#bdafcc;}
-        @media(max-width:768px){
-            .product-modal-inner{grid-template-columns:1fr;}
-            .prod-gallery{border-radius:20px 20px 0 0;}
-            .mega-dropdown-content{width:98vw;left:0;transform:none;}
-            .main-nav{display:none;}
-            .brand-name{font-size:1.2rem;}
+
+        /* ── RESET & BASE ── */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { background:var(--cream); color:var(--brown); font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; overflow-x:hidden; }
+
+        /* ── GIRASOLES DECORATIVOS (SVG inline en CSS) ── */
+        .sunflower-deco {
+            position:absolute; pointer-events:none; opacity:0.13; z-index:0;
         }
+        .sunflower-deco svg { display:block; }
+
+        /* ── HEADER ── */
+        header {
+            background:var(--white);
+            box-shadow:0 3px 18px var(--shadow);
+            position:sticky; top:0; z-index:1000;
+            border-bottom:3px solid var(--gold-light);
+        }
+        .nav-container {
+            display:flex; justify-content:space-between; align-items:center;
+            max-width:1300px; margin:0 auto; padding:10px 20px;
+            position:relative;
+        }
+        .logo-container { display:flex; align-items:center; gap:10px; cursor:pointer; flex-shrink:0; }
+        .logo-img {
+            width:52px; height:52px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.6rem; overflow:hidden;
+            box-shadow:0 3px 12px rgba(245,166,35,0.4);
+            border:2px solid var(--gold-light);
+            transition:var(--transition); background:var(--cream-dark);
+        }
+        .logo-img img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+        .logo-img:active { transform:scale(0.82) rotate(-15deg); }
+        .brand-name {
+            font-size:1.5rem; font-weight:900; color:var(--gold-dark);
+            letter-spacing:1px; text-shadow:0 1px 3px rgba(213,136,26,0.2);
+        }
+
+        /* ── HAMBURGER MOBILE ── */
+        .hamburger {
+            display:none; flex-direction:column; gap:5px; cursor:pointer;
+            padding:8px; border:none; background:transparent; z-index:1100;
+        }
+        .hamburger span {
+            display:block; width:24px; height:3px;
+            background:var(--gold-dark); border-radius:2px;
+            transition:var(--transition);
+        }
+        .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+        .hamburger.open span:nth-child(2) { opacity:0; }
+        .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+        /* ── NAV DESKTOP ── */
+        .main-nav .nav-links { display:flex; list-style:none; gap:6px; align-items:center; }
+        .nav-links > li { position:relative; }
+        .nav-links a {
+            text-decoration:none; color:var(--brown); font-weight:600;
+            padding:9px 13px; border-radius:22px;
+            display:flex; align-items:center; gap:6px;
+            transition:var(--transition); cursor:pointer; font-size:0.93rem;
+            white-space:nowrap;
+        }
+        .nav-links a:hover, .nav-links .active-nav {
+            color:var(--gold-dark); background:rgba(245,166,35,0.15);
+        }
+
+        /* ── DROPDOWNS DESKTOP ── */
+        /* ── DROPDOWNS: técnica padding-top para evitar gap ── */
+        /* El li tiene padding-top invisible que "conecta" el link con el menú */
+        .dropdown-menu {
+            display:none; position:absolute; top:100%; left:0;
+            background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
+            border-radius:12px; padding:8px 0; min-width:210px; list-style:none;
+            border-top:3px solid var(--gold); animation:slideUp 0.25s ease; z-index:500;
+            /* padding superior extra = zona de "aterrizaje" del mouse */
+            padding-top:6px;
+        }
+        .dropdown-menu li { position:relative; }
+        .dropdown-menu a { border-radius:0; padding:10px 18px; font-weight:500; font-size:0.9rem; }
+        .dropdown-menu a:hover { background:var(--cream-dark); color:var(--gold-dark); }
+        .dropdown-menu li:hover > .submenu-right { display:block; }
+        .submenu-right {
+            display:none; position:absolute; top:-6px; left:100%;
+            background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
+            border-radius:12px; padding:8px 0; min-width:200px; list-style:none;
+            border-left:3px solid var(--gold-light); z-index:501;
+        }
+        /* Puente invisible lateral para llegar al submenu sin que se cierre */
+        .dropdown-menu li::before {
+            content:''; position:absolute; top:0; left:100%;
+            width:20px; height:100%; background:transparent; z-index:400;
+        }
+
+        /* ── MEGA MENÚ VELAS ── */
+        .velas-mega-wrap { position:static; }
+        .velas-top-menu {
+            display:none; position:absolute; top:100%; left:-20px;
+            background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
+            border-radius:12px; padding:6px 0 8px; min-width:230px; list-style:none;
+            border-top:3px solid var(--gold); animation:slideUp 0.25s ease; z-index:500;
+        }
+        .velas-top-menu li { position:relative; }
+        .velas-top-menu > li > a {
+            border-radius:0; padding:11px 18px 11px 14px; font-weight:600; font-size:0.93rem;
+            display:flex; justify-content:space-between; align-items:center;
+        }
+        .velas-top-menu > li > a:hover { background:var(--cream-dark); color:var(--gold-dark); }
+        /* Puente invisible lateral: cubre el espacio entre la categoría y el subpanel */
+        .velas-top-menu > li::before {
+            content:''; position:absolute; top:0; left:100%;
+            width:20px; height:100%; background:transparent; z-index:400;
+        }
+        .velas-sub-panel {
+            display:none; position:absolute; top:-6px; left:100%;
+            background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
+            border-radius:12px; padding:14px 16px; min-width:220px; list-style:none;
+            border-left:3px solid var(--gold-light); z-index:502;
+        }
+        .velas-sub-panel li a { padding:8px 10px; font-size:0.87rem; display:block; border-radius:7px; }
+        .velas-sub-panel li a:hover { background:var(--cream-dark); color:var(--gold-dark); }
+        .velas-top-menu > li:hover > .velas-sub-panel { display:block; }
+        .nav-links li:hover > .dropdown-menu,
+        .nav-links li:hover > .velas-top-menu { display:block; }
+        .nav-links li:hover > .dropdown-menu { display:block; }
+
+        /* ── VISTAS / SECCIONES ── */
+        .view-section { display:none; animation:fadeIn 0.5s ease forwards; min-height:70vh; }
+        .view-section.active-view { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+        @keyframes slideUp { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+
+        /* ── CARRUSEL HERO ── */
+        .carousel-section {
+            width:100%; height:440px; overflow:hidden; position:relative;
+            background:var(--cream-dark);
+        }
+        @media(max-width:600px){ .carousel-section { height:280px; } }
+        .carousel-track { width:100%; height:100%; }
+        .slide {
+            width:100%; height:100%; display:none;
+            background-size:cover; background-position:center;
+            align-items:center; justify-content:center; flex-direction:column;
+            text-align:center; padding:20px; cursor:pointer;
+            position:relative;
+        }
+        .slide::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(to bottom, rgba(61,48,24,0.15), rgba(61,48,24,0.55));
+        }
+        .slide.active { display:flex; animation:fadeIn 0.7s ease; }
+        .slide-content { position:relative; z-index:1; }
+        .slide-content h2 {
+            font-size:2.6rem; color:var(--white); font-weight:900;
+            text-shadow:0 3px 14px rgba(0,0,0,0.4); margin-bottom:10px;
+        }
+        .slide-content p {
+            font-size:1.2rem; color:var(--cream-dark); font-weight:500;
+            text-shadow:0 2px 8px rgba(0,0,0,0.35);
+        }
+        @media(max-width:600px){
+            .slide-content h2 { font-size:1.5rem; }
+            .slide-content p { font-size:0.95rem; }
+        }
+        .carousel-dots {
+            position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+            display:flex; gap:8px; z-index:5;
+        }
+        .carousel-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:rgba(255,255,255,0.5); cursor:pointer; transition:0.3s;
+            border:none;
+        }
+        .carousel-dot.active { background:var(--gold); transform:scale(1.3); }
+
+        /* ── SECCIÓN TESTIMONIOS (CINTA) ── */
+        .testimonials-section {
+            padding:50px 20px; background:var(--cream-dark);
+            overflow:hidden; position:relative;
+        }
+        .testimonials-section::before, .testimonials-section::after {
+            content:'🌻'; position:absolute; font-size:3rem; opacity:0.12; top:14px;
+        }
+        .testimonials-section::before { left:20px; }
+        .testimonials-section::after { right:20px; }
+        .testimonials-title {
+            text-align:center; font-size:1.7rem; font-weight:800;
+            color:var(--gold-dark); margin-bottom:30px;
+        }
+        .belt-outer { overflow:hidden; position:relative; }
+        .belt-outer::before, .belt-outer::after {
+            content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
+        }
+        .belt-outer::before { left:0; background:linear-gradient(to right,var(--cream-dark),transparent); }
+        .belt-outer::after  { right:0; background:linear-gradient(to left,var(--cream-dark),transparent); }
+        .belt-track {
+            display:flex; gap:20px;
+            animation:scrollBelt 40s linear infinite;
+            width:max-content;
+        }
+        .belt-track:hover { animation-play-state:paused; }
+        @keyframes scrollBelt { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+        .testimonial-card {
+            flex-shrink:0; width:280px; background:var(--white);
+            border-radius:14px; padding:22px;
+            box-shadow:0 4px 18px var(--shadow);
+            border-top:4px solid var(--gold-light);
+        }
+        .testimonial-card .stars { color:var(--gold); font-size:1rem; margin-bottom:8px; letter-spacing:2px; }
+        .testimonial-card .quote { font-size:0.92rem; color:#5a4a20; line-height:1.6; font-style:italic; margin-bottom:12px; }
+        .testimonial-card .author { font-weight:700; color:var(--gold-dark); font-size:0.88rem; }
+
+        /* ── GRID PRODUCTOS ── */
+        .catalog-container { max-width:1200px; margin:0 auto; padding:40px 20px; }
+        .section-title {
+            color:var(--gold-dark); font-size:1.8rem; font-weight:800;
+            margin-bottom:28px; display:flex; align-items:center; gap:10px;
+        }
+        .products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:26px; }
+        @media(max-width:500px){ .products-grid { grid-template-columns:1fr 1fr; gap:14px; } }
+        .product-card {
+            background:var(--white); border-radius:14px; overflow:hidden;
+            box-shadow:0 5px 18px var(--shadow); transition:var(--transition); cursor:pointer;
+            border-bottom:3px solid transparent;
+        }
+        .product-card:hover { transform:translateY(-7px); box-shadow:0 14px 32px rgba(213,140,30,0.22); border-bottom-color:var(--gold); }
+        .product-img-placeholder {
+            width:100%; height:220px;
+            background:linear-gradient(135deg,var(--cream-dark),#FFE9A0);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--gold-dark); font-size:3.5rem;
+        }
+        .product-img-placeholder img { width:100%; height:100%; object-fit:cover; }
+        .product-info { padding:18px; }
+        .product-badge {
+            display:inline-block; font-size:0.72rem; background:var(--cream-dark);
+            color:var(--brown-mid); padding:3px 10px; border-radius:20px; margin-bottom:7px;
+            font-weight:700; border:1px solid var(--gold-light);
+        }
+        .product-title { font-size:1.1rem; margin-bottom:6px; font-weight:700; color:var(--brown); }
+        .product-desc { font-size:0.88rem; color:#7a6a3a; margin-bottom:10px; height:38px; overflow:hidden; }
+        .product-price { font-size:1.25rem; font-weight:800; color:var(--gold-dark); }
+
+        /* ── ESTADOS VACÍO / LOADING ── */
+        .empty-state { text-align:center; padding:60px 20px; color:var(--gold-dark); font-size:1rem; }
+        .empty-icon { font-size:4rem; margin-bottom:14px; display:block; }
+        .loading-spinner { text-align:center; padding:50px; color:var(--gold-dark); }
+        .spinner {
+            display:inline-block; width:42px; height:42px; border-radius:50%;
+            border:4px solid var(--gold-light); border-top-color:var(--gold);
+            animation:spin 0.8s linear infinite; margin-bottom:12px;
+        }
+        @keyframes spin { to{transform:rotate(360deg);} }
+
+        /* ── CONTENIDO PÁGINAS INTERNAS ── */
+        .container-box {
+            max-width:980px; margin:40px auto; background:var(--white);
+            padding:40px; border-radius:18px;
+            box-shadow:0 8px 28px var(--shadow); border-left:6px solid var(--gold);
+        }
+        @media(max-width:600px){ .container-box { padding:22px 16px; margin:20px 12px; } }
+        .page-title { color:var(--gold-dark); font-size:2rem; margin-bottom:20px; display:flex; align-items:center; gap:12px; font-weight:800; }
+        .info-p { font-size:1.05rem; line-height:1.85; margin-bottom:18px; color:var(--brown-mid); }
+        .grid-two-cols { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:22px; }
+        @media(max-width:600px){ .grid-two-cols { grid-template-columns:1fr; } }
+        .sub-box {
+            background:var(--cream); border:1px dashed var(--gold-light);
+            padding:22px; border-radius:12px; transition:var(--transition);
+        }
+        .sub-box:hover { transform:scale(1.015); background:var(--cream-dark); }
+        .sub-box h3 { color:var(--gold-dark); margin-bottom:12px; font-size:1.2rem; }
+        .magic-list { list-style:none; margin-top:8px; }
+        .magic-list li { padding:5px 0; display:flex; align-items:center; gap:8px; font-size:0.97rem; }
+        .magic-list li::before { content:"🌻"; font-size:0.85rem; }
+        .souvenir-cta { background:linear-gradient(135deg,var(--cream-dark),#FFE895); border-radius:18px; padding:44px; text-align:center; margin-top:26px; }
+        .souvenir-cta p { font-size:1.4rem; font-weight:700; color:var(--brown); margin-bottom:18px; }
+
+        /* ── MODAL ADMIN ── */
+        .modal {
+            display:none; position:fixed; inset:0; z-index:2000;
+            background:rgba(61,48,24,0.65); align-items:center; justify-content:center;
+            backdrop-filter:blur(5px);
+        }
+        .modal-content {
+            background:var(--white); padding:30px; border-radius:18px;
+            width:94%; max-width:700px; max-height:92vh; overflow-y:auto;
+            box-shadow:0 22px 55px rgba(0,0,0,0.28); border-top:5px solid var(--gold);
+        }
+        @media(max-width:600px){ .modal-content { padding:18px 14px; } }
+        .close-modal { float:right; font-size:30px; cursor:pointer; color:#bbb; transition:0.2s; line-height:1; }
+        .close-modal:hover { color:var(--gold-dark); }
+        .modal-content input, .modal-content textarea, .modal-content select {
+            width:100%; margin-bottom:12px; padding:11px 13px;
+            border:1.5px solid var(--gold-light); border-radius:9px; font-size:0.97rem;
+            background:var(--cream); color:var(--brown); outline:none;
+            transition:border-color 0.2s;
+        }
+        .modal-content input:focus, .modal-content textarea:focus, .modal-content select:focus {
+            border-color:var(--gold);
+        }
+        .btn-save {
+            background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+            color:var(--white); border:none; padding:13px; width:100%;
+            cursor:pointer; border-radius:9px; font-weight:700; font-size:1rem;
+            box-shadow:0 4px 16px rgba(213,136,26,0.35); transition:var(--transition);
+        }
+        .btn-save:hover { opacity:0.9; transform:translateY(-1px); }
+        .admin-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+        .admin-tab {
+            flex:1; min-width:90px; padding:9px 6px; font-size:0.85rem;
+            border:2px solid var(--gold-light); background:transparent;
+            border-radius:9px; cursor:pointer; font-weight:600;
+            color:var(--gold-dark); transition:var(--transition);
+        }
+        .admin-tab.active { background:var(--gold); color:var(--white); border-color:var(--gold); }
+        .admin-panel { display:none; }
+        .admin-panel.active { display:block; }
+        .upload-progress { display:none; margin:10px 0; }
+        .progress-bar { height:6px; background:#f0e8c8; border-radius:3px; overflow:hidden; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light)); width:0%; transition:width 0.3s; }
+        .logo-preview-img { width:76px; height:76px; border-radius:50%; object-fit:cover; display:none; margin:10px auto; border:3px solid var(--gold-light); }
+        .img-preview-row { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+        .img-preview-thumb { width:76px; height:76px; object-fit:cover; border-radius:8px; border:2px solid var(--gold-light); }
+        .product-item-admin { display:flex; align-items:center; gap:10px; padding:10px; border:1px solid #f0e8c0; border-radius:9px; margin-bottom:7px; background:var(--cream); }
+        .product-item-admin img { width:48px; height:48px; object-fit:cover; border-radius:7px; flex-shrink:0; }
+        .product-item-admin .info { flex:1; min-width:0; }
+        .product-item-admin .info strong { display:block; font-size:0.9rem; color:var(--brown); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .product-item-admin .info span { font-size:0.77rem; color:#9a7c3a; }
+        .btn-delete { background:#e05555; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.78rem; flex-shrink:0; }
+
+        /* ── PANEL CARRUSEL EN ADMIN ── */
+        .carousel-item-admin { display:flex; align-items:center; gap:10px; padding:10px; border:1px solid #f0e8c0; border-radius:9px; margin-bottom:7px; background:var(--cream); }
+        .carousel-item-admin img { width:80px; height:50px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+        .carousel-item-admin .info { flex:1; min-width:0; }
+        .carousel-item-admin .info strong { display:block; font-size:0.88rem; }
+        .carousel-item-admin .info span { font-size:0.75rem; color:#9a7c3a; }
+
+        /* ── MODAL DETALLE PRODUCTO ── */
+        .product-modal {
+            display:none; position:fixed; inset:0; z-index:3000;
+            background:rgba(61,48,24,0.72); align-items:center; justify-content:center;
+            backdrop-filter:blur(6px);
+        }
+        .product-modal.open { display:flex; }
+        .product-modal-inner {
+            background:var(--white); border-radius:20px;
+            width:94%; max-width:880px; max-height:92vh; overflow-y:auto;
+            box-shadow:0 26px 65px rgba(0,0,0,0.32);
+            display:grid; grid-template-columns:1fr 1fr; position:relative;
+        }
+        @media(max-width:650px){ .product-modal-inner { grid-template-columns:1fr; } }
+        .prod-gallery { padding:26px; background:var(--cream-dark); border-radius:20px 0 0 20px; }
+        @media(max-width:650px){ .prod-gallery { border-radius:20px 20px 0 0; } }
+        .prod-main-img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px; margin-bottom:10px; }
+        .prod-main-img-placeholder {
+            width:100%; aspect-ratio:1;
+            background:linear-gradient(135deg,var(--cream-dark),#FFE9A0);
+            border-radius:12px; display:flex; align-items:center; justify-content:center;
+            font-size:5rem; margin-bottom:10px;
+        }
+        .prod-thumbs { display:flex; gap:8px; flex-wrap:wrap; }
+        .prod-thumb { width:58px; height:58px; object-fit:cover; border-radius:8px; cursor:pointer; border:2.5px solid transparent; transition:0.2s; }
+        .prod-thumb.active, .prod-thumb:hover { border-color:var(--gold); }
+        .prod-details { padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
+        @media(max-width:650px){ .prod-details { padding:20px 16px; } }
+        .prod-badge-cat { display:inline-block; background:var(--cream-dark); color:var(--brown-mid); font-size:0.73rem; padding:4px 12px; border-radius:20px; margin-bottom:9px; font-weight:700; border:1px solid var(--gold-light); }
+        .prod-name { font-size:1.7rem; font-weight:800; color:var(--brown); margin-bottom:7px; }
+        .prod-price-big { font-size:1.9rem; font-weight:800; color:var(--gold-dark); margin-bottom:14px; }
+        .prod-desc-full { font-size:0.97rem; color:var(--brown-mid); line-height:1.7; margin-bottom:18px; flex:1; }
+        .prod-stock-info { font-size:0.88rem; color:#999; margin-bottom:14px; }
+        .prod-stock-info.ok { color:#3a7a3a; font-weight:700; }
+        .prod-stock-info.low { color:#c05000; font-weight:700; }
+        .qty-selector { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+        .qty-selector label { font-weight:700; color:var(--brown); }
+        .qty-btn {
+            width:34px; height:34px; border-radius:50%; border:2px solid var(--gold);
+            background:transparent; color:var(--gold-dark); font-size:1.2rem; cursor:pointer;
+            display:flex; align-items:center; justify-content:center; font-weight:800; transition:0.2s;
+        }
+        .qty-btn:hover { background:var(--gold); color:var(--white); }
+        .qty-num { font-size:1.25rem; font-weight:700; min-width:28px; text-align:center; }
+        .btn-comprar {
+            background:linear-gradient(135deg,#25D366,#128C7E);
+            color:white; border:none; padding:14px 20px; border-radius:12px;
+            font-size:1rem; font-weight:700; cursor:pointer;
+            display:flex; align-items:center; justify-content:center; gap:9px;
+            width:100%; transition:var(--transition);
+        }
+        .btn-comprar:hover { opacity:0.9; transform:translateY(-2px); box-shadow:0 8px 22px rgba(37,211,102,0.38); }
+        .prod-modal-close {
+            position:absolute; top:13px; right:14px; font-size:1.7rem;
+            cursor:pointer; color:#aaa; z-index:10; line-height:1;
+            background:var(--white); width:34px; height:34px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 2px 8px rgba(0,0,0,0.13);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background:var(--brown); color:var(--cream-dark);
+            padding:40px 20px 22px; margin-top:60px;
+            border-top:4px solid var(--gold);
+        }
+        .footer-container { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; flex-wrap:wrap; gap:20px; }
+        .footer-socials { display:flex; gap:18px; }
+        .social-icon { color:var(--gold-light); font-size:1.7rem; transition:var(--transition); }
+        .social-icon:hover { transform:scale(1.25) rotate(8deg); color:var(--white); }
+        .footer-bottom { text-align:center; margin-top:30px; font-size:0.83rem; border-top:1px solid rgba(255,255,255,0.12); padding-top:18px; color:#c4a84a; }
+
+        /* ── GIRASOL SVG DECORATIVO ── */
+        @keyframes slowSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        .spin-slow { animation:slowSpin 28s linear infinite; transform-origin:center; }
     </style>
 </head>
 <body>
 
+<!-- ═══════════════ HEADER ═══════════════ -->
 <header>
     <div class="nav-container">
         <div class="logo-container" onclick="navigateTo('inicio')">
-            <div id="logo-btn" class="logo-img"><span id="logo-inner">🌸</span></div>
+            <div id="logo-btn" class="logo-img"><span id="logo-inner">🌻</span></div>
             <span class="brand-name">Bella Vela</span>
         </div>
-        <nav class="main-nav">
+
+        <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMobile()">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav">
             <ul class="nav-links">
-                <li><a onclick="navigateTo('inicio')" id="nav-inicio" class="active-nav"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a onclick="navigateTo('quienes-somos')" id="nav-quienes-somos"><i class="fas fa-magic"></i> Nosotras</a></li>
+                <li><a onclick="navigateTo('inicio');closeMobile()" id="nav-inicio" class="active-nav"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a onclick="navigateTo('quienes-somos');closeMobile()" id="nav-quienes-somos"><i class="fas fa-seedling"></i> Nosotras</a></li>
+
                 <li class="dropdown">
-                    <a onclick="navigateTo('talleres')" id="nav-talleres"><i class="fas fa-graduation-cap"></i> Talleres <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
+                    <a onclick="navigateTo('talleres');closeMobile()" id="nav-talleres"><i class="fas fa-graduation-cap"></i> Talleres <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a onclick="navigateTo('talleres-creativos')">Talleres Creativos</a></li>
-                        <li><a onclick="navigateTo('talleres-ninos')">Para Niños</a></li>
-                        <li><a onclick="navigateTo('talleres-adultos')">Adultos Emprendedores</a></li>
+                        <li><a onclick="navigateTo('talleres-creativos');closeMobile()">Talleres Creativos</a></li>
+                        <li><a onclick="navigateTo('talleres-ninos');closeMobile()">Para Niños 🧸</a></li>
+                        <li><a onclick="navigateTo('talleres-adultos');closeMobile()">Adultos Emprendedores 🚀</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a onclick="filterCategory('velas','','')"><i class="fas fa-fire"></i> Velas <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
-                    <div class="mega-dropdown-content">
-                        <div class="mega-col">
-                            <h3>🏰 Literatura Fantástica</h3>
-                            <ul>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Escuela de Magia')">Escuela de Magia</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Biblioteca')">Biblioteca</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Pociones')">Pociones</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Bosque Prohibido')">Bosque Prohibido</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Sala Común')">Sala Común</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Hechizos')">Hechizos</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Torneo de Magia')">Torneo de Magia</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-col">
-                            <h3>🧛 Sobrenatural</h3>
-                            <ul>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Vampiro')">Vampiro</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Hombre Lobo')">Hombre Lobo</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Fantasma')">Fantasma</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Bruja')">Bruja</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Demonio')">Demonio</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Ángel')">Ángel</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Zombie')">Zombie</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Fénix')">Fénix</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Pegaso')">Pegaso</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Grifo')">Grifo</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Sabueso')">Sabueso / Can Cerbero</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Hidra')">Hidra</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Minotauro')">Minotauro</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-col">
-                            <h3>🧚 Entidades Mágicas</h3>
-                            <ul>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Hada')">Hada</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Duende')">Duende</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Elfo')">Elfo</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Ninfa')">Ninfa</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Sirena')">Sirena</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Unicornio')">Unicornio</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Dragón')">Dragón</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a onclick="filterCategory('pegatinas','','')"><i class="fas fa-sticky-note"></i> Pegatinas <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="filterCategory('pegatinas','sobres-sorpresa','')">Sobres Sorpresa</a></li>
+
+                <!-- VELAS: click va al listado, hover muestra 3 categorías -->
+                <li class="velas-mega-wrap">
+                    <a onclick="filterCategory('velas','','');closeMobile()"><i class="fas fa-fire"></i> Velas <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
+                    <ul class="velas-top-menu">
                         <li>
-                            <a>Colecciones Temáticas <i class="fas fa-chevron-right" style="font-size:0.6rem;float:right;margin-top:4px;"></i></a>
-                            <ul class="submenu-right">
-                                <li><a onclick="filterCategory('pegatinas','entidades-magicas','')">Entidades Mágicas</a></li>
-                                <li><a onclick="filterCategory('pegatinas','sobrenatural','')">Sobrenatural</a></li>
-                                <li><a onclick="filterCategory('pegatinas','literatura-fantastica','')">Literatura Fantástica</a></li>
+                            <a>🏰 Literatura Fantástica <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
+                            <ul class="velas-sub-panel">
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Escuela de Magia');closeMobile()">Escuela de Magia</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Biblioteca');closeMobile()">Biblioteca</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Pociones');closeMobile()">Pociones</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Bosque Prohibido');closeMobile()">Bosque Prohibido</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Sala Común');closeMobile()">Sala Común</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Hechizos');closeMobile()">Hechizos</a></li>
+                                <li><a onclick="filterCategory('velas','literatura-fantastica','Torneo de Magia');closeMobile()">Torneo de Magia</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>🧛 Sobrenatural <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
+                            <ul class="velas-sub-panel">
+                                <li><a onclick="filterCategory('velas','sobrenatural','Vampiro');closeMobile()">Vampiro</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Hombre Lobo');closeMobile()">Hombre Lobo</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Fantasma');closeMobile()">Fantasma</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Bruja');closeMobile()">Bruja</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Demonio');closeMobile()">Demonio</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Ángel');closeMobile()">Ángel</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Zombie');closeMobile()">Zombie</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Fénix');closeMobile()">Fénix</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Pegaso');closeMobile()">Pegaso</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Grifo');closeMobile()">Grifo</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Sabueso');closeMobile()">Sabueso</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Hidra');closeMobile()">Hidra</a></li>
+                                <li><a onclick="filterCategory('velas','sobrenatural','Minotauro');closeMobile()">Minotauro</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>🧚 Entidades Mágicas <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
+                            <ul class="velas-sub-panel">
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Hada');closeMobile()">Hada</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Duende');closeMobile()">Duende</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Elfo');closeMobile()">Elfo</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Ninfa');closeMobile()">Ninfa</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Sirena');closeMobile()">Sirena</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Unicornio');closeMobile()">Unicornio</a></li>
+                                <li><a onclick="filterCategory('velas','entidades-magicas','Dragón');closeMobile()">Dragón</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
+
                 <li class="dropdown">
-                    <a onclick="filterCategory('insumos','','')"><i class="fas fa-box-open"></i> Insumos <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
+                    <a onclick="filterCategory('pegatinas','','');closeMobile()"><i class="fas fa-sticky-note"></i> Pegatinas <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a onclick="filterCategory('insumos','ceras','')">Ceras</a></li>
-                        <li><a onclick="filterCategory('insumos','pabilos','')">Pabilos</a></li>
-                        <li><a onclick="filterCategory('insumos','esencias','')">Esencias</a></li>
-                        <li><a onclick="filterCategory('insumos','colorantes','')">Colorantes</a></li>
-                        <li><a onclick="filterCategory('insumos','laminas-miel','')">Láminas de Miel</a></li>
+                        <li><a onclick="filterCategory('pegatinas','sobres-sorpresa','');closeMobile()">Sobres Sorpresa</a></li>
+                        <li>
+                            <a>Colecciones <i class="fas fa-chevron-right" style="font-size:0.6rem;float:right;margin-top:4px;"></i></a>
+                            <ul class="submenu-right">
+                                <li><a onclick="filterCategory('pegatinas','entidades-magicas','');closeMobile()">Entidades Mágicas</a></li>
+                                <li><a onclick="filterCategory('pegatinas','sobrenatural','');closeMobile()">Sobrenatural</a></li>
+                                <li><a onclick="filterCategory('pegatinas','literatura-fantastica','');closeMobile()">Literatura Fantástica</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
-                <li><a onclick="navigateTo('souvenirs')" id="nav-souvenirs"><i class="fas fa-gift"></i> Souvenirs</a></li>
+
+                <li class="dropdown">
+                    <a onclick="filterCategory('insumos','','');closeMobile()"><i class="fas fa-box-open"></i> Insumos <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="filterCategory('insumos','ceras','');closeMobile()">Ceras</a></li>
+                        <li><a onclick="filterCategory('insumos','pabilos','');closeMobile()">Pabilos</a></li>
+                        <li><a onclick="filterCategory('insumos','esencias','');closeMobile()">Esencias</a></li>
+                        <li><a onclick="filterCategory('insumos','colorantes','');closeMobile()">Colorantes</a></li>
+                        <li><a onclick="filterCategory('insumos','laminas-miel','');closeMobile()">Láminas de Miel</a></li>
+                    </ul>
+                </li>
+
+                <li><a onclick="navigateTo('souvenirs');closeMobile()" id="nav-souvenirs"><i class="fas fa-gift"></i> Souvenirs</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<!-- SECCIONES -->
+<!-- ═══════════════ SECCIÓN INICIO ═══════════════ -->
 <section id="view-inicio" class="view-section active-view">
-    <div class="carousel-section">
-        <div class="carousel-container">
-            <div class="slide active" style="background:linear-gradient(135deg,rgba(123,44,191,0.85),rgba(36,0,70,0.9));">
-                <h2>✨ Bienvenidos a Bella Vela</h2>
-                <p>Creaciones artesanales que despiertan la imaginación y la magia</p>
+
+    <!-- Carrusel Hero -->
+    <div class="carousel-section" style="position:relative;">
+        <!-- Girasol decorativo esquina -->
+        <div class="sunflower-deco" style="bottom:-10px;right:30px;">
+            <svg width="110" height="110" viewBox="0 0 100 100">
+                <g class="spin-slow" transform-origin="50 50">
+                    <ellipse cx="50" cy="18" rx="10" ry="20" fill="#F5A623"/>
+                    <ellipse cx="50" cy="82" rx="10" ry="20" fill="#F5A623"/>
+                    <ellipse cx="18" cy="50" rx="20" ry="10" fill="#F5A623"/>
+                    <ellipse cx="82" cy="50" rx="20" ry="10" fill="#F5A623"/>
+                    <ellipse cx="27" cy="27" rx="10" ry="20" fill="#FFD966" transform="rotate(45 27 27)"/>
+                    <ellipse cx="73" cy="27" rx="10" ry="20" fill="#FFD966" transform="rotate(-45 73 27)"/>
+                    <ellipse cx="27" cy="73" rx="10" ry="20" fill="#FFD966" transform="rotate(-45 27 73)"/>
+                    <ellipse cx="73" cy="73" rx="10" ry="20" fill="#FFD966" transform="rotate(45 73 73)"/>
+                </g>
+                <circle cx="50" cy="50" r="18" fill="#3D3018"/>
+            </svg>
+        </div>
+
+        <div class="carousel-track" id="carousel-images">
+            <div class="slide active" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.7),rgba(122,92,30,0.7)),linear-gradient(45deg,#FFD966,#F5A623);">
+                <div class="slide-content">
+                    <h2>✨ Bienvenidos a Bella Vela</h2>
+                    <p>Creaciones artesanales que despiertan la imaginación y la magia</p>
+                </div>
             </div>
-            <div class="slide" style="background:linear-gradient(135deg,rgba(157,78,221,0.85),rgba(123,44,191,0.9));">
-                <h2>🕯️ Velas Místicas Únicas</h2>
-                <p>Cada esencia cuenta una historia, cada rincón se llena de emoción</p>
+            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.65),rgba(100,74,20,0.7)),linear-gradient(45deg,#F5A623,#D4881A);">
+                <div class="slide-content">
+                    <h2>🕯️ Velas Místicas Únicas</h2>
+                    <p>Cada esencia cuenta una historia, cada rincón se llena de emoción</p>
+                </div>
             </div>
-            <div class="slide" style="background:linear-gradient(135deg,rgba(36,0,70,0.85),rgba(157,78,221,0.9));">
-                <h2>🧚 Pegatinas & Insumos</h2>
-                <p>Todo lo que necesitás para crear tu propio universo mágico</p>
+            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(122,92,30,0.65),rgba(61,48,24,0.7)),linear-gradient(45deg,#FFE9A0,#F5A623);">
+                <div class="slide-content">
+                    <h2>🌻 Pegatinas & Insumos</h2>
+                    <p>Todo lo que necesitás para crear tu propio universo mágico</p>
+                </div>
             </div>
         </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
     </div>
-    <main class="catalog-container">
-        <h2 class="section-title" id="catalog-header">🌟 Nuestras Creaciones</h2>
-        <div id="products-grid" class="products-grid">
-            <div class="loading-spinner"><div class="spinner"></div><p>Cargando magia...</p></div>
+
+    <!-- Girasol decorativo lateral izquierdo -->
+    <div style="position:relative;overflow:hidden;">
+        <div class="sunflower-deco" style="left:-20px;top:40px;">
+            <svg width="140" height="140" viewBox="0 0 100 100">
+                <g class="spin-slow" style="animation-direction:reverse;" transform-origin="50 50">
+                    <ellipse cx="50" cy="16" rx="9" ry="19" fill="#F5A623"/>
+                    <ellipse cx="50" cy="84" rx="9" ry="19" fill="#F5A623"/>
+                    <ellipse cx="16" cy="50" rx="19" ry="9" fill="#F5A623"/>
+                    <ellipse cx="84" cy="50" rx="19" ry="9" fill="#F5A623"/>
+                    <ellipse cx="26" cy="26" rx="9" ry="18" fill="#FFD966" transform="rotate(45 26 26)"/>
+                    <ellipse cx="74" cy="26" rx="9" ry="18" fill="#FFD966" transform="rotate(-45 74 26)"/>
+                    <ellipse cx="26" cy="74" rx="9" ry="18" fill="#FFD966" transform="rotate(-45 26 74)"/>
+                    <ellipse cx="74" cy="74" rx="9" ry="18" fill="#FFD966" transform="rotate(45 74 74)"/>
+                </g>
+                <circle cx="50" cy="50" r="17" fill="#3D3018"/>
+            </svg>
         </div>
-    </main>
+
+        <!-- Productos -->
+        <main class="catalog-container">
+            <h2 class="section-title" id="catalog-header">🌟 Nuestras Creaciones</h2>
+            <div id="products-grid" class="products-grid">
+                <div class="loading-spinner"><div class="spinner"></div><p>Cargando magia...</p></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Testimonios (cinta continua) -->
+    <section class="testimonials-section">
+        <h2 class="testimonials-title">🌻 Lo que dicen nuestras clientas</h2>
+        <div class="belt-outer">
+            <div class="belt-track" id="belt-track">
+                <!-- se llena dinámicamente -->
+            </div>
+        </div>
+    </section>
+
 </section>
 
+<!-- ═══ CATÁLOGO FILTRADO ═══ -->
+<section id="view-catalogo-filtrado" class="view-section">
+    <div style="position:relative;">
+        <div class="sunflower-deco" style="right:-15px;top:30px;">
+            <svg width="120" height="120" viewBox="0 0 100 100">
+                <g class="spin-slow" transform-origin="50 50">
+                    <ellipse cx="50" cy="17" rx="9" ry="19" fill="#F5A623"/>
+                    <ellipse cx="50" cy="83" rx="9" ry="19" fill="#F5A623"/>
+                    <ellipse cx="17" cy="50" rx="19" ry="9" fill="#F5A623"/>
+                    <ellipse cx="83" cy="50" rx="19" ry="9" fill="#F5A623"/>
+                    <ellipse cx="26" cy="26" rx="9" ry="18" fill="#FFD966" transform="rotate(45 26 26)"/>
+                    <ellipse cx="74" cy="26" rx="9" ry="18" fill="#FFD966" transform="rotate(-45 74 26)"/>
+                    <ellipse cx="26" cy="74" rx="9" ry="18" fill="#FFD966" transform="rotate(-45 26 74)"/>
+                    <ellipse cx="74" cy="74" rx="9" ry="18" fill="#FFD966" transform="rotate(45 74 74)"/>
+                </g>
+                <circle cx="50" cy="50" r="17" fill="#3D3018"/>
+            </svg>
+        </div>
+        <main class="catalog-container">
+            <h2 class="section-title" id="catalog-filter-header">Productos</h2>
+            <div id="products-grid-filter" class="products-grid">
+                <div class="loading-spinner"><div class="spinner"></div><p>Cargando...</p></div>
+            </div>
+        </main>
+    </div>
+</section>
+
+<!-- ═══ QUIÉNES SOMOS ═══ -->
 <section id="view-quienes-somos" class="view-section">
     <div class="container-box">
-        <h2 class="page-title">🌸 Nosotras</h2>
+        <h2 class="page-title">🌻 Nosotras</h2>
         <p class="info-p"><strong>Nuestra Historia:</strong> Somos una madre e hija unidas por la creatividad, la imaginación y el amor por los pequeños detalles. Así nació Bella Vela, un rincón donde la fantasía cobra vida a través de nuestras creaciones.</p>
-        <p class="info-p">Diseñamos y elaboramos velas artesanales, jabones y pegatinas inspirados en la magia, la mitología, las criaturas legendarias y los mundos que nos hacen soñar. Cada pieza es creada con dedicación, buscando que no solo sea bonita, sino que también transmita una historia, una emoción o un momento especial.</p>
-        <p class="info-p">Creemos que los objetos más simples pueden convertirse en recuerdos, regalos inolvidables o pequeños rituales para disfrutar el día a día. Gracias por acompañarnos y formar parte de este universo.</p>
-        <div class="sub-box" style="margin-top:20px;">
+        <p class="info-p">Diseñamos y elaboramos velas artesanales, jabones y pegatinas inspirados en la magia, la mitología, las criaturas legendarias y los mundos que nos hacen soñar.</p>
+        <p class="info-p">Creemos que los objetos más simples pueden convertirse en recuerdos, regalos inolvidables o pequeños rituales para disfrutar el día a día.</p>
+        <div class="sub-box" style="margin-top:18px;">
             <h3>📍 Ubicación & Envíos</h3>
-            <p>Nos encontramos en <strong>Juan Lacaze, Colonia</strong>. También nos movilizamos en <strong>Montevideo</strong> y realizamos envíos seguros a todo el país.</p>
+            <p>Nos encontramos en <strong>Juan Lacaze, Colonia</strong>. También en <strong>Montevideo</strong> y realizamos envíos a todo el país.</p>
         </div>
     </div>
 </section>
 
+<!-- ═══ TALLERES ═══ -->
 <section id="view-talleres" class="view-section">
     <div class="container-box">
         <h2 class="page-title">🎓 Talleres</h2>
-        <p class="info-p">Creemos que crear con las manos también es una forma de conectar con uno mismo. Talleres para todas las edades, sin experiencia previa necesaria.</p>
+        <p class="info-p">Creemos que crear con las manos es una forma de conectar con uno mismo. Talleres para todas las edades, sin experiencia previa necesaria.</p>
         <div class="grid-two-cols">
             <div class="sub-box" onclick="navigateTo('talleres-ninos')" style="cursor:pointer;">
-                <h3>👶 Para Niños</h3>
-                <p>Diversión guiada, color y manualidades en entornos seguros y divertidos.</p>
+                <h3>🧸 Para Niños</h3>
+                <p>Diversión guiada, color y manualidades en un entorno seguro y divertido.</p>
             </div>
             <div class="sub-box" onclick="navigateTo('talleres-adultos')" style="cursor:pointer;">
-                <h3>🚀 Para Adultos Emprendedores</h3>
-                <p>Aprende técnicas profesionales y expande tus horizontes creativos.</p>
+                <h3>🚀 Para Adultos</h3>
+                <p>Técnicas profesionales y horizontes creativos para emprendedores.</p>
             </div>
         </div>
-        <div style="margin-top:25px;">
-            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20info%20sobre%20los%20talleres%20de%20Bella%20Vela%20✨" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:14px 30px;width:auto;">
-                <i class="fab fa-whatsapp"></i> Consultar disponibilidad de talleres
+        <div style="margin-top:22px;">
+            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20info%20sobre%20los%20talleres%20de%20Bella%20Vela%20🌻" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:13px 28px;width:auto;">
+                <i class="fab fa-whatsapp"></i> Consultar disponibilidad
             </a>
         </div>
     </div>
@@ -309,27 +694,27 @@
 <section id="view-talleres-creativos" class="view-section">
     <div class="container-box">
         <h2 class="page-title">🎨 Talleres Creativos</h2>
-        <p class="info-p">Pensados para compartir, aprender y disfrutar creando con las manos. Tanto niños como adultos encontrarán un espacio donde la imaginación es la protagonista.</p>
-        <p class="info-p"><em>¡No es necesario tener experiencia previa, solo ganas de aprender y pasar un momento diferente!</em></p>
+        <p class="info-p">Pensados para compartir, aprender y disfrutar creando con las manos. Tanto niños como adultos encontrarán un espacio donde la imaginación es protagonista.</p>
+        <p class="info-p"><em>¡No se necesita experiencia previa, solo ganas de crear!</em></p>
     </div>
 </section>
 
 <section id="view-talleres-ninos" class="view-section">
     <div class="container-box">
         <h2 class="page-title">🧸 Talleres para Niños</h2>
-        <p class="info-p">Un espacio lleno de color e imaginación donde los más pequeños desarrollan su creatividad. Cada actividad está adaptada a su edad en un ambiente seguro y acompañado.</p>
+        <p class="info-p">Un espacio lleno de color donde los más pequeños desarrollan su creatividad en un ambiente seguro.</p>
         <div class="sub-box">
-            <h3>Actividades disponibles:</h3>
+            <h3>Actividades:</h3>
             <ul class="magic-list">
                 <li>Elaboración de velas artesanales</li>
                 <li>Jabones artesanales divertidos</li>
-                <li>Velas y jabones con esencias aromáticas</li>
+                <li>Creaciones con esencias aromáticas</li>
                 <li>Creaciones temáticas para regalar</li>
                 <li>Talleres de temporada</li>
             </ul>
         </div>
-        <div style="margin-top:20px;">
-            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20el%20taller%20para%20niños%20🧸" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:14px 30px;width:auto;">
+        <div style="margin-top:18px;">
+            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20el%20taller%20para%20niños%20🧸" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:13px 28px;width:auto;">
                 <i class="fab fa-whatsapp"></i> Reservar taller para niños
             </a>
         </div>
@@ -339,19 +724,19 @@
 <section id="view-talleres-adultos" class="view-section">
     <div class="container-box">
         <h2 class="page-title">💼 Talleres Para Adultos</h2>
-        <p class="info-p">Desconectate de la rutina, aprendé nuevas técnicas y disfrutá del proceso creativo. Elaborá y personalizá tus propias creaciones mientras compartís una experiencia relajante.</p>
+        <p class="info-p">Desconectate de la rutina y aprendé nuevas técnicas mientras disfrutás del proceso creativo.</p>
         <div class="sub-box">
-            <h3>Técnicas que aprenderás:</h3>
+            <h3>Técnicas:</h3>
             <ul class="magic-list">
                 <li>Velas en envases de vidrio o cerámica</li>
                 <li>Velas en moldes de silicona</li>
                 <li>Bombones y pastillas aromáticas</li>
                 <li>Placas aromáticas sólidas</li>
-                <li>Uso correcto de ceras, pabilos y esencias puras</li>
+                <li>Ceras, pabilos y esencias puras</li>
             </ul>
         </div>
-        <div style="margin-top:20px;">
-            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20el%20taller%20para%20adultos%20emprendedores%20🚀" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:14px 30px;width:auto;">
+        <div style="margin-top:18px;">
+            <a href="https://wa.me/59891330582?text=Hola!%20Me%20interesa%20el%20taller%20para%20adultos%20🚀" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:13px 28px;width:auto;">
                 <i class="fab fa-whatsapp"></i> Reservar taller para adultos
             </a>
         </div>
@@ -362,41 +747,37 @@
     <div class="container-box">
         <h2 class="page-title" style="justify-content:center;">💝 Souvenirs Especiales</h2>
         <div class="souvenir-cta">
-            <p>Tu idea + nuestro trabajo = el souvenir perfecto ✨</p>
-            <p style="font-size:1rem;color:#5a3a7a;margin-bottom:25px;">Diseñamos propuestas a medida para cumpleaños, bautismos, baby showers o eventos corporativos.</p>
-            <a href="https://wa.me/59891330582?text=Hola!%20Me%20gustaría%20consultar%20sobre%20souvenirs%20personalizados%20💝" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:16px 35px;width:auto;">
+            <p>Tu idea + nuestro trabajo = el souvenir perfecto 🌻</p>
+            <p style="font-size:1rem;color:var(--brown-mid);margin-bottom:22px;">Diseñamos a medida para cumpleaños, bautismos, baby showers o eventos corporativos.</p>
+            <a href="https://wa.me/59891330582?text=Hola!%20Me%20gustaría%20consultar%20sobre%20souvenirs%20💝" target="_blank" class="btn-save" style="display:inline-block;text-decoration:none;padding:14px 32px;width:auto;">
                 <i class="fab fa-whatsapp"></i> Escribinos para presupuesto
             </a>
         </div>
     </div>
 </section>
 
-<section id="view-catalogo-filtrado" class="view-section">
-    <main class="catalog-container">
-        <h2 class="section-title" id="catalog-filter-header">Productos</h2>
-        <div id="products-grid-filter" class="products-grid">
-            <div class="loading-spinner"><div class="spinner"></div><p>Cargando...</p></div>
-        </div>
-    </main>
-</section>
-
-<!-- MODAL ADMIN -->
+<!-- ═══════════ MODAL ADMIN ═══════════ -->
 <div id="admin-modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="close-modal-btn">&times;</span>
-        <h2 style="color:var(--primary-magic);margin-bottom:20px;"><i class="fas fa-lock"></i> Panel Admin — Bella Vela</h2>
+        <h2 style="color:var(--gold-dark);margin-bottom:18px;font-size:1.3rem;">🌻 Panel Admin — Bella Vela</h2>
+
         <div class="admin-tabs">
-            <button class="admin-tab active" onclick="switchTab('tab-producto',this)">➕ Agregar</button>
-            <button class="admin-tab" onclick="switchTab('tab-logo',this)">🌸 Logo</button>
-            <button class="admin-tab" onclick="switchTab('tab-lista',this)">📋 Productos</button>
+            <button class="admin-tab active" onclick="switchTab('tab-producto',this)">➕ Producto</button>
+            <button class="admin-tab" onclick="switchTab('tab-carrusel',this)">🖼 Carrusel</button>
+            <button class="admin-tab" onclick="switchTab('tab-testimonio',this)">💬 Opiniones</button>
+            <button class="admin-tab" onclick="switchTab('tab-logo',this)">🌻 Logo</button>
+            <button class="admin-tab" onclick="switchTab('tab-lista',this)">📋 Lista</button>
         </div>
+
+        <!-- TAB PRODUCTO -->
         <div id="tab-producto" class="admin-panel active">
             <input type="text" id="prod-name" placeholder="Nombre del producto *">
-            <textarea id="prod-desc" placeholder="Descripción detallada del producto..." rows="3"></textarea>
+            <textarea id="prod-desc" placeholder="Descripción detallada..." rows="3"></textarea>
             <input type="number" id="prod-price" placeholder="Precio en $ (ej: 450)" min="0">
             <input type="number" id="prod-stock" placeholder="Stock disponible (ej: 10)" min="0">
             <select id="prod-categoria">
-                <option value="">-- Seleccioná una categoría --</option>
+                <option value="">-- Categoría *</option>
                 <option value="velas">🕯️ Velas</option>
                 <option value="pegatinas">🩹 Pegatinas</option>
                 <option value="insumos">📦 Insumos</option>
@@ -404,45 +785,95 @@
                 <option value="souvenirs">🎁 Souvenirs</option>
             </select>
             <select id="prod-subcategoria" style="display:none;">
-                <option value="">-- Subcategoría (opcional) --</option>
+                <option value="">-- Subcategoría (opcional)</option>
             </select>
-            <label style="font-size:0.9rem;color:#666;margin-bottom:8px;display:block;">📸 Imágenes del producto (podés subir varias)</label>
+            <label style="font-size:0.88rem;color:#888;margin-bottom:6px;display:block;">📸 Imágenes del producto (podés subir varias)</label>
             <input type="file" id="prod-imgs" accept="image/*" multiple>
             <div id="img-preview-row" class="img-preview-row"></div>
             <div class="upload-progress" id="upload-progress">
                 <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-                <p style="font-size:0.85rem;color:#888;margin-top:5px;" id="upload-status">Subiendo...</p>
+                <p style="font-size:0.82rem;color:#888;margin-top:5px;" id="upload-status">Subiendo...</p>
             </div>
             <button class="btn-save" id="btn-guardar-producto" onclick="guardarProducto()">
                 <i class="fas fa-save"></i> Guardar en Firebase
             </button>
         </div>
+
+        <!-- TAB CARRUSEL -->
+        <div id="tab-carrusel" class="admin-panel">
+            <p style="font-size:0.88rem;color:#888;margin-bottom:14px;">Agregá imágenes al carrusel del inicio. Podés asignarles un link de la página.</p>
+            <input type="text" id="slide-titulo" placeholder="Título del slide (ej: Nuestras Velas)">
+            <input type="text" id="slide-subtitulo" placeholder="Subtítulo / descripción">
+            <select id="slide-link">
+                <option value="">Sin link (decorativo)</option>
+                <option value="inicio">→ Inicio</option>
+                <option value="quienes-somos">→ Nosotras</option>
+                <option value="talleres">→ Talleres</option>
+                <option value="souvenirs">→ Souvenirs</option>
+                <option value="cat:velas">→ Catálogo: Velas</option>
+                <option value="cat:pegatinas">→ Catálogo: Pegatinas</option>
+                <option value="cat:insumos">→ Catálogo: Insumos</option>
+            </select>
+            <label style="font-size:0.88rem;color:#888;margin-bottom:6px;display:block;">🖼 Imagen de fondo del slide</label>
+            <input type="file" id="slide-img" accept="image/*">
+            <div class="upload-progress" id="slide-progress">
+                <div class="progress-bar"><div class="progress-fill" id="slide-progress-fill"></div></div>
+                <p style="font-size:0.82rem;color:#888;margin-top:5px;" id="slide-status">Subiendo...</p>
+            </div>
+            <button class="btn-save" onclick="guardarSlide()" style="margin-top:6px;">
+                <i class="fas fa-plus"></i> Agregar slide al carrusel
+            </button>
+            <hr style="margin:18px 0;border-color:#f0e8c0;">
+            <p style="font-size:0.85rem;color:#888;margin-bottom:10px;">Slides actuales:</p>
+            <div id="slide-list-admin"></div>
+        </div>
+
+        <!-- TAB TESTIMONIOS -->
+        <div id="tab-testimonio" class="admin-panel">
+            <p style="font-size:0.88rem;color:#888;margin-bottom:14px;">Agregá opiniones de clientes para mostrar en la cinta de testimonios.</p>
+            <input type="text" id="test-autor" placeholder="Nombre del cliente (ej: María G.)">
+            <textarea id="test-texto" placeholder="Opinión del cliente..." rows="3"></textarea>
+            <select id="test-estrellas">
+                <option value="5">⭐⭐⭐⭐⭐ — 5 estrellas</option>
+                <option value="4">⭐⭐⭐⭐ — 4 estrellas</option>
+                <option value="3">⭐⭐⭐ — 3 estrellas</option>
+            </select>
+            <button class="btn-save" onclick="guardarTestimonio()">
+                <i class="fas fa-comment-dots"></i> Agregar opinión
+            </button>
+            <hr style="margin:18px 0;border-color:#f0e8c0;">
+            <div id="test-list-admin"></div>
+        </div>
+
+        <!-- TAB LOGO -->
         <div id="tab-logo" class="admin-panel">
-            <p style="font-size:0.9rem;color:#666;margin-bottom:15px;">Subí la imagen que aparecerá como logo del sitio.</p>
+            <p style="font-size:0.88rem;color:#888;margin-bottom:14px;">Subí la imagen del logo que aparece en la barra de navegación.</p>
             <input type="file" id="logo-file" accept="image/*" onchange="previewLogo(this)">
             <img id="logo-preview-img" class="logo-preview-img" alt="Preview logo">
             <div class="upload-progress" id="logo-progress">
                 <div class="progress-bar"><div class="progress-fill" id="logo-progress-fill"></div></div>
-                <p style="font-size:0.85rem;color:#888;margin-top:5px;" id="logo-status">Subiendo logo...</p>
+                <p style="font-size:0.82rem;color:#888;margin-top:5px;" id="logo-status">Subiendo logo...</p>
             </div>
             <button class="btn-save" onclick="subirLogo()" style="margin-top:10px;">
                 <i class="fas fa-upload"></i> Subir Logo
             </button>
         </div>
+
+        <!-- TAB LISTA -->
         <div id="tab-lista" class="admin-panel">
-            <p style="font-size:0.85rem;color:#888;margin-bottom:15px;">Productos en la base de datos:</p>
+            <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">Productos en la base de datos:</p>
             <div id="product-list-admin"></div>
         </div>
     </div>
 </div>
 
-<!-- MODAL DETALLE PRODUCTO -->
+<!-- ═══════════ MODAL DETALLE PRODUCTO ═══════════ -->
 <div id="product-detail-modal" class="product-modal">
     <div class="product-modal-inner">
         <span class="prod-modal-close" onclick="cerrarProducto()">&times;</span>
         <div class="prod-gallery">
             <div id="prod-main-img-wrap">
-                <div class="prod-main-img-placeholder" id="prod-main-emoji">🕯️</div>
+                <div class="prod-main-img-placeholder">🕯️</div>
             </div>
             <div class="prod-thumbs" id="prod-thumbs-row"></div>
         </div>
@@ -462,7 +893,7 @@
                     <button class="qty-btn" onclick="cambiarCantidad(1)">+</button>
                 </div>
                 <button class="btn-comprar" onclick="comprarPorWhatsApp()">
-                    <i class="fab fa-whatsapp" style="font-size:1.4rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size:1.3rem;"></i>
                     Comprar por WhatsApp
                 </button>
             </div>
@@ -470,29 +901,66 @@
     </div>
 </div>
 
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
-    <div class="footer-container">
-        <div>
-            <h4>Bella Vela Uy</h4>
-            <p>Hecho con amor y magia pura ✨</p>
-            <p style="font-size:0.85rem;color:#bdafcc;margin-top:5px;">Juan Lacaze, Colonia — Uruguay</p>
+    <!-- Girasoles decorativos footer -->
+    <div style="position:relative;overflow:hidden;">
+        <div class="sunflower-deco" style="position:absolute;right:40px;top:-20px;opacity:0.08;">
+            <svg width="90" height="90" viewBox="0 0 100 100">
+                <g class="spin-slow" transform-origin="50 50">
+                    <ellipse cx="50" cy="17" rx="9" ry="19" fill="#FFD966"/>
+                    <ellipse cx="50" cy="83" rx="9" ry="19" fill="#FFD966"/>
+                    <ellipse cx="17" cy="50" rx="19" ry="9" fill="#FFD966"/>
+                    <ellipse cx="83" cy="50" rx="19" ry="9" fill="#FFD966"/>
+                    <ellipse cx="26" cy="26" rx="9" ry="18" fill="#F5A623" transform="rotate(45 26 26)"/>
+                    <ellipse cx="74" cy="26" rx="9" ry="18" fill="#F5A623" transform="rotate(-45 74 26)"/>
+                    <ellipse cx="26" cy="74" rx="9" ry="18" fill="#F5A623" transform="rotate(-45 26 74)"/>
+                    <ellipse cx="74" cy="74" rx="9" ry="18" fill="#F5A623" transform="rotate(45 74 74)"/>
+                </g>
+                <circle cx="50" cy="50" r="17" fill="#FFFDE7"/>
+            </svg>
         </div>
-        <div class="footer-socials">
-            <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <div class="footer-container">
+            <div>
+                <h4 style="font-size:1.2rem;color:var(--gold-light);margin-bottom:6px;">🌻 Bella Vela Uy</h4>
+                <p style="font-size:0.9rem;">Hecho con amor y magia pura</p>
+                <p style="font-size:0.82rem;color:#c4a84a;margin-top:4px;">Juan Lacaze, Colonia — Uruguay</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 Bella Vela. Todos los derechos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bella Vela. Todos los derechos reservados. 🌻</p>
+        </div>
     </div>
 </footer>
 
-<!-- FIREBASE + LÓGICA -->
+<!-- ═══════════ MOBILE NAV CSS ═══════════ -->
+<style>
+@media(max-width:900px){
+    .hamburger { display:flex; }
+    .main-nav {
+        display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+        background:rgba(255,253,231,0.97); z-index:1050; overflow-y:auto;
+        padding:80px 24px 40px; backdrop-filter:blur(4px);
+    }
+    .main-nav.open { display:block; }
+    .main-nav .nav-links { flex-direction:column; gap:0; align-items:stretch; }
+    .nav-links > li { border-bottom:1px solid var(--gold-light); }
+    .nav-links a { padding:14px 4px; font-size:1.05rem; border-radius:0; }
+    .dropdown-menu, .velas-top-menu { display:block!important; position:static; box-shadow:none; border:none; border-top:none; padding:0 0 0 16px; animation:none; border-radius:0; }
+    .velas-sub-panel, .submenu-right { display:block!important; position:static; box-shadow:none; border:none; padding:0 0 0 16px; }
+    .dropdown-menu a, .velas-top-menu > li > a, .velas-sub-panel li a { padding:10px 4px; font-size:0.95rem; }
+}
+</style>
+
+<!-- ═══════════ FIREBASE + LÓGICA ═══════════ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ⚠️ REEMPLAZÁ apiKey y appId con los que te aparecen en Firebase Console
-// Configuración → Tus apps → Web → </> → SDK snippet
+// ⚠️ REEMPLAZÁ apiKey y appId con los de Firebase Console → Configuración → Tus apps → Web
 const firebaseConfig = {
     apiKey: "PEGA_AQUI_TU_API_KEY",
     authDomain: "bellavelauy.firebaseapp.com",
@@ -501,13 +969,12 @@ const firebaseConfig = {
     messagingSenderId: "348489547827",
     appId: "PEGA_AQUI_TU_APP_ID"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// CLOUDINARY
-const CLOUD_NAME = "aeab0aex";
-const UPLOAD_PRESET = "bella_vela_preset"; // Crear en cloudinary.com → Settings → Upload → Add preset → Unsigned
+// ── CLOUDINARY ──
+const CLOUD_NAME   = "root";
+const UPLOAD_PRESET = "bella_vela_preset"; // Crear en cloudinary.com → Settings → Upload → Add Upload Preset → Unsigned
 
 async function subirImagen(file, onProgress) {
     const fd = new FormData();
@@ -517,120 +984,271 @@ async function subirImagen(file, onProgress) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`);
         xhr.upload.onprogress = e => { if (e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); };
-        xhr.onload = () => {
-            const d = JSON.parse(xhr.responseText);
-            if (d.secure_url) resolve(d.secure_url); else reject(d);
-        };
+        xhr.onload = () => { const d = JSON.parse(xhr.responseText); if(d.secure_url) resolve(d.secure_url); else reject(d); };
         xhr.onerror = reject;
         xhr.send(fd);
     });
 }
 
-// LOGO
+// ── LOGO ──
 window.previewLogo = function(input) {
-    const f = input.files[0]; if (!f) return;
-    const preview = document.getElementById('logo-preview-img');
-    preview.src = URL.createObjectURL(f);
-    preview.style.display = 'block';
+    const f = input.files[0]; if(!f) return;
+    const p = document.getElementById('logo-preview-img');
+    p.src = URL.createObjectURL(f); p.style.display = 'block';
 };
-
 window.subirLogo = async function() {
     const file = document.getElementById('logo-file').files[0];
-    if (!file) return alert('Seleccioná una imagen primero');
+    if(!file) return alert('Seleccioná una imagen primero');
     const prog = document.getElementById('logo-progress');
     const fill = document.getElementById('logo-progress-fill');
     const status = document.getElementById('logo-status');
     prog.style.display = 'block';
     try {
-        const url = await subirImagen(file, p => { fill.style.width = p+'%'; status.textContent = `Subiendo... ${p}%`; });
+        const url = await subirImagen(file, p => { fill.style.width=p+'%'; status.textContent=`Subiendo... ${p}%`; });
         localStorage.setItem('bv_logo', url);
         aplicarLogo(url);
         status.textContent = '✅ Logo actualizado!';
-    } catch(e) {
-        status.textContent = '❌ Error. Verificá el Upload Preset en Cloudinary.';
-        console.error(e);
-    }
+    } catch(e) { status.textContent = '❌ Error. Verificá el Upload Preset en Cloudinary.'; console.error(e); }
 };
-
 function aplicarLogo(url) {
-    document.getElementById('logo-btn').innerHTML = `<img src="${url}" alt="Logo">`;
+    document.getElementById('logo-btn').innerHTML = `<img src="${url}" alt="Logo Bella Vela">`;
 }
 const logoGuardado = localStorage.getItem('bv_logo');
-if (logoGuardado) aplicarLogo(logoGuardado);
+if(logoGuardado) aplicarLogo(logoGuardado);
 
-// GUARDAR PRODUCTO
-window.guardarProducto = async function() {
-    const nombre = document.getElementById('prod-name').value.trim();
-    const desc = document.getElementById('prod-desc').value.trim();
-    const precio = parseFloat(document.getElementById('prod-price').value);
-    const stock = parseInt(document.getElementById('prod-stock').value) || 0;
-    const categoria = document.getElementById('prod-categoria').value;
-    const subcategoria = document.getElementById('prod-subcategoria').value;
-    const files = document.getElementById('prod-imgs').files;
-    if (!nombre || !desc || !precio || !categoria) return alert('Completá nombre, descripción, precio y categoría.');
-    const btn = document.getElementById('btn-guardar-producto');
-    btn.disabled = true; btn.textContent = '⏳ Guardando...';
-    const prog = document.getElementById('upload-progress');
-    const fill = document.getElementById('progress-fill');
-    const status = document.getElementById('upload-status');
-    prog.style.display = 'block';
-    let imagenes = [];
-    try {
-        for (let i = 0; i < files.length; i++) {
-            status.textContent = `Subiendo imagen ${i+1} de ${files.length}...`;
-            const url = await subirImagen(files[i], p => { fill.style.width = ((i/files.length*100)+(p/files.length))+'%'; });
-            imagenes.push(url);
+// ── CARRUSEL (slides desde Firebase + localStorage) ──
+let slidesData = [];
+function cargarCarrusel() {
+    try { slidesData = JSON.parse(localStorage.getItem('bv_slides') || '[]'); } catch(e){ slidesData=[]; }
+    const track = document.getElementById('carousel-images');
+    // Conservar slides hardcoded si no hay slides guardados
+    if(slidesData.length === 0) return initCarrusel();
+    // Agregar slides dinámicos
+    slidesData.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'slide';
+        div.setAttribute('data-link', s.link || '');
+        if(s.imgUrl) {
+            div.style.backgroundImage = `linear-gradient(to bottom,rgba(61,48,24,0.18),rgba(61,48,24,0.58)),url('${s.imgUrl}')`;
+            div.style.backgroundSize = 'cover';
+            div.style.backgroundPosition = 'center';
+        } else {
+            div.style.background = 'linear-gradient(135deg,rgba(122,92,30,0.7),rgba(61,48,24,0.8)),linear-gradient(45deg,#FFD966,#F5A623)';
         }
-        fill.style.width = '90%'; status.textContent = 'Guardando en Firestore...';
-        await addDoc(collection(db, "productos"), {
-            nombre, descripcion: desc, precio, stock, categoria,
-            subcategoria: subcategoria || '', imagenes, visible: true,
-            fechaCreacion: new Date().toISOString()
-        });
-        fill.style.width = '100%'; status.textContent = '✅ Producto guardado!';
-        ['prod-name','prod-desc','prod-price','prod-stock'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('prod-categoria').value = '';
-        document.getElementById('prod-subcategoria').style.display = 'none';
-        document.getElementById('prod-imgs').value = '';
-        document.getElementById('img-preview-row').innerHTML = '';
-        cargarProductosInicio();
-    } catch(e) {
-        status.textContent = '❌ Error: ' + e.message; console.error(e);
+        div.innerHTML = `<div class="slide-content"><h2>${s.titulo||''}</h2><p>${s.subtitulo||''}</p></div>`;
+        track.appendChild(div);
+    });
+    initCarrusel();
+}
+
+function initCarrusel() {
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('carousel-dots');
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'carousel-dot' + (i===0?' active':'');
+        btn.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(btn);
+    });
+    let cur = 0;
+    window._carouselGo = function goToSlide(n) {
+        slides[cur].classList.remove('active');
+        document.querySelectorAll('.carousel-dot')[cur]?.classList.remove('active');
+        cur = n;
+        slides[cur].classList.add('active');
+        document.querySelectorAll('.carousel-dot')[cur]?.classList.add('active');
+    };
+    if(slides.length > 1) {
+        setInterval(() => { const next=(cur+1)%slides.length; window._carouselGo(next); }, 5000);
     }
-    btn.disabled = false; btn.textContent = 'Guardar en Firebase';
+    // Click en slide → navegar al link
+    slides.forEach(slide => {
+        slide.addEventListener('click', () => {
+            const link = slide.getAttribute('data-link') || '';
+            if(!link) return;
+            if(link.startsWith('cat:')) {
+                const cat = link.replace('cat:','');
+                filterCategory(cat,'','');
+            } else {
+                navigateTo(link);
+            }
+        });
+    });
+}
+window.goToSlide = (n) => window._carouselGo && window._carouselGo(n);
+
+window.guardarSlide = async function() {
+    const titulo = document.getElementById('slide-titulo').value.trim();
+    const subtitulo = document.getElementById('slide-subtitulo').value.trim();
+    const link = document.getElementById('slide-link').value;
+    const file = document.getElementById('slide-img').files[0];
+    const prog = document.getElementById('slide-progress');
+    const fill = document.getElementById('slide-progress-fill');
+    const status = document.getElementById('slide-status');
+    prog.style.display = 'block';
+    let imgUrl = '';
+    try {
+        if(file) {
+            status.textContent = 'Subiendo imagen...';
+            imgUrl = await subirImagen(file, p => { fill.style.width=p+'%'; });
+        }
+        slidesData.push({ titulo, subtitulo, link, imgUrl });
+        localStorage.setItem('bv_slides', JSON.stringify(slidesData));
+        fill.style.width='100%'; status.textContent='✅ Slide guardado! Recargá la página para verlo.';
+        cargarSlidesAdmin();
+    } catch(e) { status.textContent='❌ Error: '+e.message; }
 };
 
-// CARGAR PRODUCTOS
-let todosLosProductos = [];
+function cargarSlidesAdmin() {
+    const lista = document.getElementById('slide-list-admin');
+    if(!slidesData.length){ lista.innerHTML='<p style="font-size:0.85rem;color:#aaa;">No hay slides agregados aún.</p>'; return; }
+    lista.innerHTML = slidesData.map((s,i) => `
+        <div class="carousel-item-admin">
+            ${s.imgUrl ? `<img src="${s.imgUrl}" alt="slide">` : '<div style="width:80px;height:50px;background:var(--cream-dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🖼</div>'}
+            <div class="info">
+                <strong>${s.titulo||'Sin título'}</strong>
+                <span>${s.subtitulo||''} ${s.link?'| → '+s.link:''}</span>
+            </div>
+            <button class="btn-delete" onclick="eliminarSlide(${i})">🗑</button>
+        </div>
+    `).join('');
+}
+window.eliminarSlide = function(i) {
+    if(!confirm('¿Eliminar este slide?')) return;
+    slidesData.splice(i,1);
+    localStorage.setItem('bv_slides', JSON.stringify(slidesData));
+    cargarSlidesAdmin();
+};
 
+// ── TESTIMONIOS ──
+let testimoniosData = [];
+function cargarTestimonios() {
+    try { testimoniosData = JSON.parse(localStorage.getItem('bv_testimonios') || '[]'); } catch(e){ testimoniosData=[]; }
+    // Testimonios por defecto si no hay ninguno
+    if(!testimoniosData.length) {
+        testimoniosData = [
+            { autor:'Laura M.', texto:'Las velas son una maravilla, el aroma dura días. ¡Volveré a comprar!', estrellas:5 },
+            { autor:'Valentina R.', texto:'Compré pegatinas para mi hija y quedó enamorada. Calidad increíble.', estrellas:5 },
+            { autor:'Sofía G.', texto:'El taller fue una experiencia única, aprendí muchísimo y me divertí.', estrellas:5 },
+            { autor:'Camila T.', texto:'Los souvenirs del cumple de mi nena quedaron perfectos. Muy recomendable!', estrellas:5 },
+            { autor:'Ana P.', texto:'Me llegó todo super bien embalado y en tiempo. Las velas huelen a magia.', estrellas:5 },
+        ];
+    }
+    renderTestimonios();
+}
+
+function renderTestimonios() {
+    const track = document.getElementById('belt-track');
+    if(!track) return;
+    // Duplicar para loop continuo
+    const todas = [...testimoniosData, ...testimoniosData];
+    track.innerHTML = todas.map(t => `
+        <div class="testimonial-card">
+            <div class="stars">${'★'.repeat(t.estrellas)}${'☆'.repeat(5-t.estrellas)}</div>
+            <p class="quote">"${t.texto}"</p>
+            <p class="author">— ${t.autor}</p>
+        </div>
+    `).join('');
+}
+
+window.guardarTestimonio = function() {
+    const autor = document.getElementById('test-autor').value.trim();
+    const texto = document.getElementById('test-texto').value.trim();
+    const estrellas = parseInt(document.getElementById('test-estrellas').value);
+    if(!autor || !texto) return alert('Completá el nombre y la opinión.');
+    testimoniosData.push({ autor, texto, estrellas });
+    localStorage.setItem('bv_testimonios', JSON.stringify(testimoniosData));
+    renderTestimonios();
+    cargarTestimoniosAdmin();
+    document.getElementById('test-autor').value='';
+    document.getElementById('test-texto').value='';
+    alert('✅ Opinión agregada!');
+};
+
+function cargarTestimoniosAdmin() {
+    const lista = document.getElementById('test-list-admin');
+    if(!testimoniosData.length){ lista.innerHTML=''; return; }
+    lista.innerHTML = testimoniosData.map((t,i) => `
+        <div class="product-item-admin" style="align-items:flex-start;">
+            <div class="info" style="flex:1;">
+                <strong>${t.autor} — ${'★'.repeat(t.estrellas)}</strong>
+                <span style="display:block;white-space:normal;margin-top:3px;">"${t.texto}"</span>
+            </div>
+            <button class="btn-delete" onclick="eliminarTestimonio(${i})" style="flex-shrink:0;">🗑</button>
+        </div>
+    `).join('');
+}
+window.eliminarTestimonio = function(i) {
+    if(!confirm('¿Eliminar esta opinión?')) return;
+    testimoniosData.splice(i,1);
+    localStorage.setItem('bv_testimonios', JSON.stringify(testimoniosData));
+    renderTestimonios(); cargarTestimoniosAdmin();
+};
+
+// ── GUARDAR PRODUCTO ──
+window.guardarProducto = async function() {
+    const nombre   = document.getElementById('prod-name').value.trim();
+    const desc     = document.getElementById('prod-desc').value.trim();
+    const precio   = parseFloat(document.getElementById('prod-price').value);
+    const stock    = parseInt(document.getElementById('prod-stock').value) || 0;
+    const categoria    = document.getElementById('prod-categoria').value;
+    const subcategoria = document.getElementById('prod-subcategoria').value;
+    const files        = document.getElementById('prod-imgs').files;
+    if(!nombre||!desc||!precio||!categoria) return alert('Completá nombre, descripción, precio y categoría.');
+    const btn = document.getElementById('btn-guardar-producto');
+    btn.disabled=true; btn.textContent='⏳ Guardando...';
+    const prog=document.getElementById('upload-progress'), fill=document.getElementById('progress-fill'), status=document.getElementById('upload-status');
+    prog.style.display='block';
+    let imagenes=[];
+    try {
+        for(let i=0;i<files.length;i++){
+            status.textContent=`Subiendo imagen ${i+1} de ${files.length}...`;
+            const url = await subirImagen(files[i], p=>{ fill.style.width=((i/files.length*100)+(p/files.length))+'%'; });
+            imagenes.push(url);
+        }
+        fill.style.width='90%'; status.textContent='Guardando en Firestore...';
+        await addDoc(collection(db,"productos"),{
+            nombre,descripcion:desc,precio,stock,categoria,
+            subcategoria:subcategoria||'',imagenes,visible:true,
+            fechaCreacion:new Date().toISOString()
+        });
+        fill.style.width='100%'; status.textContent='✅ Producto guardado!';
+        ['prod-name','prod-desc','prod-price','prod-stock'].forEach(id=>document.getElementById(id).value='');
+        document.getElementById('prod-categoria').value='';
+        document.getElementById('prod-subcategoria').style.display='none';
+        document.getElementById('prod-imgs').value='';
+        document.getElementById('img-preview-row').innerHTML='';
+        cargarProductosInicio();
+    } catch(e){ status.textContent='❌ Error: '+e.message; console.error(e); }
+    btn.disabled=false; btn.textContent='Guardar en Firebase';
+};
+
+// ── CARGAR PRODUCTOS ──
+let todosLosProductos = [];
 async function cargarProductosInicio() {
     const grid = document.getElementById('products-grid');
-    grid.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Cargando magia...</p></div>';
+    grid.innerHTML='<div class="loading-spinner"><div class="spinner"></div><p>Cargando magia...</p></div>';
     try {
-        const snap = await getDocs(collection(db, "productos"));
-        todosLosProductos = snap.docs.map(d => ({id:d.id,...d.data()})).filter(p => p.visible !== false);
+        const snap = await getDocs(collection(db,"productos"));
+        todosLosProductos = snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.visible!==false);
         renderGrid(grid, todosLosProductos);
     } catch(e) {
-        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🔧</div><p>Configurá las credenciales de Firebase para ver los productos.</p></div>';
+        grid.innerHTML='<div class="empty-state"><span class="empty-icon">🔧</span><p>Configurá las credenciales de Firebase para ver los productos.</p></div>';
     }
 }
-
-function getCategoryEmoji(cat) {
-    return {velas:'🕯️',pegatinas:'🩹',insumos:'📦',jabones:'🧼',souvenirs:'🎁'}[cat] || '✨';
-}
-function getCategoryLabel(cat) {
-    return {velas:'Velas',pegatinas:'Pegatinas',insumos:'Insumos',jabones:'Jabones',souvenirs:'Souvenirs'}[cat] || cat;
-}
+function getCategoryEmoji(cat){ return {velas:'🕯️',pegatinas:'🩹',insumos:'📦',jabones:'🧼',souvenirs:'🎁'}[cat]||'🌻'; }
+function getCategoryLabel(cat){ return {velas:'Velas',pegatinas:'Pegatinas',insumos:'Insumos',jabones:'Jabones',souvenirs:'Souvenirs'}[cat]||cat; }
 
 function renderGrid(container, productos) {
-    if (!productos.length) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🕯️</div><p>Aún no hay productos en esta categoría.</p></div>';
+    if(!productos.length){
+        container.innerHTML='<div class="empty-state"><span class="empty-icon">🌻</span><p>Aún no hay productos en esta categoría.</p></div>';
         return;
     }
-    container.innerHTML = productos.map(p => `
+    container.innerHTML = productos.map(p=>`
         <div class="product-card" onclick="abrirProducto('${p.id}')">
             <div class="product-img-placeholder">
-                ${p.imagenes && p.imagenes[0] ? `<img src="${p.imagenes[0]}" alt="${p.nombre}" loading="lazy">` : getCategoryEmoji(p.categoria)}
+                ${p.imagenes&&p.imagenes[0]?`<img src="${p.imagenes[0]}" alt="${p.nombre}" loading="lazy">`:getCategoryEmoji(p.categoria)}
             </div>
             <div class="product-info">
                 <span class="product-badge">${getCategoryLabel(p.categoria)}${p.subcategoria?' · '+p.subcategoria:''}</span>
@@ -643,199 +1261,185 @@ function renderGrid(container, productos) {
 }
 
 window.filterCategory = function(cat, subcat, item) {
-    let filtrados = todosLosProductos.filter(p => !cat || p.categoria === cat);
-    if (subcat) filtrados = filtrados.filter(p => p.subcategoria === subcat);
-    if (item) filtrados = filtrados.filter(p => p.subcategoria === item || p.nombre.includes(item));
-    let titulo = '🌟 ';
-    if (cat === 'velas') titulo += '🕯️ Velas';
-    else if (cat === 'pegatinas') titulo += '🩹 Pegatinas';
-    else if (cat === 'insumos') titulo += '📦 Insumos';
-    if (subcat) titulo += ' — ' + subcat.replace(/-/g,' ').replace(/\b\w/g, l=>l.toUpperCase());
-    if (item) titulo += ' · ' + item;
-    document.getElementById('catalog-filter-header').textContent = titulo;
+    let filtrados = todosLosProductos.filter(p=>!cat||p.categoria===cat);
+    if(subcat) filtrados=filtrados.filter(p=>p.subcategoria===subcat);
+    if(item) filtrados=filtrados.filter(p=>p.subcategoria===item||p.nombre.includes(item));
+    let titulo='🌟 ';
+    if(cat==='velas') titulo+='🕯️ Velas';
+    else if(cat==='pegatinas') titulo+='🩹 Pegatinas';
+    else if(cat==='insumos') titulo+='📦 Insumos';
+    if(subcat) titulo+=' — '+subcat.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+    if(item) titulo+=' · '+item;
+    document.getElementById('catalog-filter-header').textContent=titulo;
     renderGrid(document.getElementById('products-grid-filter'), filtrados);
     navigateTo('catalogo-filtrado');
 };
 
-// MODAL PRODUCTO
-let productoActual = null;
-let cantidadActual = 1;
-
+// ── MODAL PRODUCTO ──
+let productoActual=null, cantidadActual=1;
 window.abrirProducto = function(id) {
-    const p = todosLosProductos.find(x => x.id === id);
-    if (!p) return;
-    productoActual = p; cantidadActual = 1;
-    document.getElementById('qty-display').textContent = 1;
-    document.getElementById('prod-modal-name').textContent = p.nombre;
-    document.getElementById('prod-modal-price').textContent = '$' + p.precio;
-    document.getElementById('prod-modal-desc').textContent = p.descripcion;
-    document.getElementById('prod-modal-cat').textContent = getCategoryLabel(p.categoria) + (p.subcategoria ? ' · '+p.subcategoria : '');
-    const stockEl = document.getElementById('prod-modal-stock');
-    if (p.stock === 0) { stockEl.textContent = '❌ Sin stock disponible'; stockEl.className = 'prod-stock-info low'; }
-    else if (p.stock <= 3) { stockEl.textContent = `⚠️ Últimas ${p.stock} unidades`; stockEl.className = 'prod-stock-info low'; }
-    else { stockEl.textContent = `✅ ${p.stock} unidades disponibles`; stockEl.className = 'prod-stock-info ok'; }
-    const mainWrap = document.getElementById('prod-main-img-wrap');
-    const thumbsRow = document.getElementById('prod-thumbs-row');
-    if (p.imagenes && p.imagenes.length > 0) {
-        mainWrap.innerHTML = `<img class="prod-main-img" id="prod-main-big" src="${p.imagenes[0]}" alt="${p.nombre}">`;
-        thumbsRow.innerHTML = p.imagenes.map((url,i) =>
-            `<img class="prod-thumb ${i===0?'active':''}" src="${url}" onclick="cambiarFoto(this,'${url}')" alt="foto ${i+1}">`
-        ).join('');
+    const p=todosLosProductos.find(x=>x.id===id); if(!p) return;
+    productoActual=p; cantidadActual=1;
+    document.getElementById('qty-display').textContent=1;
+    document.getElementById('prod-modal-name').textContent=p.nombre;
+    document.getElementById('prod-modal-price').textContent='$'+p.precio;
+    document.getElementById('prod-modal-desc').textContent=p.descripcion;
+    document.getElementById('prod-modal-cat').textContent=getCategoryLabel(p.categoria)+(p.subcategoria?' · '+p.subcategoria:'');
+    const stockEl=document.getElementById('prod-modal-stock');
+    if(p.stock===0){ stockEl.textContent='❌ Sin stock'; stockEl.className='prod-stock-info low'; }
+    else if(p.stock<=3){ stockEl.textContent=`⚠️ Últimas ${p.stock} unidades`; stockEl.className='prod-stock-info low'; }
+    else { stockEl.textContent=`✅ ${p.stock} disponibles`; stockEl.className='prod-stock-info ok'; }
+    const mainWrap=document.getElementById('prod-main-img-wrap');
+    const thumbsRow=document.getElementById('prod-thumbs-row');
+    if(p.imagenes&&p.imagenes.length>0){
+        mainWrap.innerHTML=`<img class="prod-main-img" id="prod-main-big" src="${p.imagenes[0]}" alt="${p.nombre}">`;
+        thumbsRow.innerHTML=p.imagenes.map((url,i)=>`<img class="prod-thumb ${i===0?'active':''}" src="${url}" onclick="cambiarFoto(this,'${url}')" alt="foto ${i+1}">`).join('');
     } else {
-        mainWrap.innerHTML = `<div class="prod-main-img-placeholder">${getCategoryEmoji(p.categoria)}</div>`;
-        thumbsRow.innerHTML = '';
+        mainWrap.innerHTML=`<div class="prod-main-img-placeholder">${getCategoryEmoji(p.categoria)}</div>`;
+        thumbsRow.innerHTML='';
     }
     document.getElementById('product-detail-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow='hidden';
 };
-
-window.cambiarFoto = function(el, url) {
-    document.getElementById('prod-main-big').src = url;
-    document.querySelectorAll('.prod-thumb').forEach(t => t.classList.remove('active'));
+window.cambiarFoto = function(el,url){
+    document.getElementById('prod-main-big').src=url;
+    document.querySelectorAll('.prod-thumb').forEach(t=>t.classList.remove('active'));
     el.classList.add('active');
 };
-
-window.cerrarProducto = function() {
+window.cerrarProducto = function(){
     document.getElementById('product-detail-modal').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow='';
 };
-
-window.cambiarCantidad = function(delta) {
-    const max = productoActual?.stock || 99;
-    cantidadActual = Math.max(1, Math.min(cantidadActual + delta, max));
-    document.getElementById('qty-display').textContent = cantidadActual;
+window.cambiarCantidad = function(delta){
+    cantidadActual=Math.max(1,Math.min(cantidadActual+delta,productoActual?.stock||99));
+    document.getElementById('qty-display').textContent=cantidadActual;
 };
-
-window.comprarPorWhatsApp = function() {
-    if (!productoActual) return;
-    const total = productoActual.precio * cantidadActual;
-    const msg = encodeURIComponent(
-        `Hola Bella Vela! 🕯️✨\n\nMe gustaría comprar:\n\n` +
-        `📦 *${productoActual.nombre}*${productoActual.subcategoria?' ('+productoActual.subcategoria+')':''}\n` +
-        `📁 Categoría: ${getCategoryLabel(productoActual.categoria)}\n` +
-        `💲 Precio unitario: $${productoActual.precio}\n` +
-        `🔢 Cantidad: ${cantidadActual}\n` +
-        `💰 Total: $${total}\n\n` +
+window.comprarPorWhatsApp = function(){
+    if(!productoActual) return;
+    const total=productoActual.precio*cantidadActual;
+    const msg=encodeURIComponent(
+        `Hola Bella Vela! 🌻\n\nMe gustaría comprar:\n\n`+
+        `📦 *${productoActual.nombre}*${productoActual.subcategoria?' ('+productoActual.subcategoria+')':''}\n`+
+        `📁 Categoría: ${getCategoryLabel(productoActual.categoria)}\n`+
+        `💲 Precio unitario: $${productoActual.precio}\n`+
+        `🔢 Cantidad: ${cantidadActual}\n`+
+        `💰 Total: $${total}\n\n`+
         `¿Pueden confirmarme disponibilidad y forma de pago? ¡Gracias! 🙏`
     );
-    window.open(`https://wa.me/59891330582?text=${msg}`, '_blank');
+    window.open(`https://wa.me/59891330582?text=${msg}`,'_blank');
 };
 
-// LISTA ADMIN
+// ── LISTA ADMIN PRODUCTOS ──
 async function cargarListaAdmin() {
-    const lista = document.getElementById('product-list-admin');
-    lista.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+    const lista=document.getElementById('product-list-admin');
+    lista.innerHTML='<div class="loading-spinner"><div class="spinner"></div></div>';
     try {
-        const snap = await getDocs(collection(db, "productos"));
-        const prods = snap.docs.map(d => ({id:d.id,...d.data()}));
-        if (!prods.length) { lista.innerHTML = '<p style="color:#888;font-size:0.9rem;">No hay productos aún.</p>'; return; }
-        lista.innerHTML = prods.map(p => `
+        const snap=await getDocs(collection(db,"productos"));
+        const prods=snap.docs.map(d=>({id:d.id,...d.data()}));
+        if(!prods.length){ lista.innerHTML='<p style="font-size:0.88rem;color:#aaa;">No hay productos aún.</p>'; return; }
+        lista.innerHTML=prods.map(p=>`
             <div class="product-item-admin">
-                ${p.imagenes && p.imagenes[0] ? `<img src="${p.imagenes[0]}" alt="${p.nombre}">` :
-                `<div style="width:50px;height:50px;background:#f3e8ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">${getCategoryEmoji(p.categoria)}</div>`}
+                ${p.imagenes&&p.imagenes[0]?`<img src="${p.imagenes[0]}" alt="${p.nombre}">`:`<div style="width:48px;height:48px;background:var(--cream-dark);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">${getCategoryEmoji(p.categoria)}</div>`}
                 <div class="info">
                     <strong>${p.nombre}</strong>
-                    <span>${getCategoryLabel(p.categoria)}${p.subcategoria?' · '+p.subcategoria:''} | $${p.precio} | Stock: ${p.stock ?? '—'}</span>
+                    <span>${getCategoryLabel(p.categoria)}${p.subcategoria?' · '+p.subcategoria:''} | $${p.precio} | Stock: ${p.stock??'—'}</span>
                 </div>
-                <button class="btn-delete" onclick="eliminarProducto('${p.id}')">🗑 Borrar</button>
+                <button class="btn-delete" onclick="eliminarProducto('${p.id}')">🗑</button>
             </div>
         `).join('');
-    } catch(e) {
-        lista.innerHTML = '<p style="color:#c00;font-size:0.9rem;">Error: ' + e.message + '</p>';
-    }
+    } catch(e){ lista.innerHTML='<p style="color:#c00;font-size:0.88rem;">Error: '+e.message+'</p>'; }
 }
-
-window.eliminarProducto = async function(id) {
-    if (!confirm('¿Eliminar este producto?')) return;
-    await deleteDoc(doc(db, "productos", id));
+window.eliminarProducto = async function(id){
+    if(!confirm('¿Eliminar este producto?')) return;
+    await deleteDoc(doc(db,"productos",id));
     cargarListaAdmin(); cargarProductosInicio();
 };
 
-// SUBCATEGORÍAS DINÁMICAS
+// ── SUBCATS DINÁMICAS ──
 const subcats = {
-    velas: [['literatura-fantastica','Literatura Fantástica'],['sobrenatural','Sobrenatural'],['entidades-magicas','Entidades Mágicas']],
-    pegatinas: [['sobres-sorpresa','Sobres Sorpresa'],['entidades-magicas','Entidades Mágicas'],['sobrenatural','Sobrenatural'],['literatura-fantastica','Literatura Fantástica']],
-    insumos: [['ceras','Ceras'],['pabilos','Pabilos'],['esencias','Esencias'],['colorantes','Colorantes'],['laminas-miel','Láminas de Miel']],
-    jabones: [], souvenirs: []
+    velas:[['literatura-fantastica','Literatura Fantástica'],['sobrenatural','Sobrenatural'],['entidades-magicas','Entidades Mágicas']],
+    pegatinas:[['sobres-sorpresa','Sobres Sorpresa'],['entidades-magicas','Entidades Mágicas'],['sobrenatural','Sobrenatural'],['literatura-fantastica','Literatura Fantástica']],
+    insumos:[['ceras','Ceras'],['pabilos','Pabilos'],['esencias','Esencias'],['colorantes','Colorantes'],['laminas-miel','Láminas de Miel']],
+    jabones:[], souvenirs:[]
 };
-document.getElementById('prod-categoria').addEventListener('change', function() {
-    const sel = document.getElementById('prod-subcategoria');
-    const opts = subcats[this.value] || [];
-    if (!opts.length) { sel.style.display = 'none'; return; }
-    sel.style.display = 'block';
-    sel.innerHTML = '<option value="">-- Subcategoría (opcional) --</option>' +
-        opts.map(([v,l]) => `<option value="${v}">${l}</option>`).join('');
+document.getElementById('prod-categoria').addEventListener('change',function(){
+    const sel=document.getElementById('prod-subcategoria');
+    const opts=subcats[this.value]||[];
+    if(!opts.length){ sel.style.display='none'; return; }
+    sel.style.display='block';
+    sel.innerHTML='<option value="">-- Subcategoría (opcional)</option>'+opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+});
+document.getElementById('prod-imgs').addEventListener('change',function(){
+    const row=document.getElementById('img-preview-row'); row.innerHTML='';
+    Array.from(this.files).forEach(f=>{ const img=document.createElement('img'); img.className='img-preview-thumb'; img.src=URL.createObjectURL(f); row.appendChild(img); });
 });
 
-document.getElementById('prod-imgs').addEventListener('change', function() {
-    const row = document.getElementById('img-preview-row');
-    row.innerHTML = '';
-    Array.from(this.files).forEach(f => {
-        const img = document.createElement('img');
-        img.className = 'img-preview-thumb';
-        img.src = URL.createObjectURL(f);
-        row.appendChild(img);
-    });
-});
-
-// TABS ADMIN
+// ── TABS ADMIN ──
 window.switchTab = function(tabId, btn) {
-    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     btn.classList.add('active');
-    if (tabId === 'tab-lista') cargarListaAdmin();
+    if(tabId==='tab-lista') cargarListaAdmin();
+    if(tabId==='tab-carrusel') cargarSlidesAdmin();
+    if(tabId==='tab-testimonio') cargarTestimoniosAdmin();
 };
 
-// CONTRASEÑA ADMIN — SHA-256 de "VB2k26"
-const SECRET_HASH = "8f94e1e42baa754422fa93612c2361b34aa90ddc1b8077badd369d11ed1b5ddc";
-async function hashText(text) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+// ── CONTRASEÑA ADMIN (SHA-256 de "VB2k26") ──
+const SECRET_HASH="8f94e1e42baa754422fa93612c2361b34aa90ddc1b8077badd369d11ed1b5ddc";
+async function hashText(text){
+    const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-let clickCounter = 0;
-document.getElementById('logo-btn').addEventListener('click', async () => {
+let clickCounter=0;
+document.getElementById('logo-btn').addEventListener('click',async()=>{
     clickCounter++;
-    if (clickCounter === 3) {
-        clickCounter = 0;
-        const pass = prompt("🔮 Introduce el conjuro de Administrador:");
-        if (pass && await hashText(pass) === SECRET_HASH) {
-            document.getElementById('admin-modal').style.display = 'flex';
-        } else if (pass) {
-            alert("✨ Fuerzas místicas denegadas. Clave incorrecta.");
+    if(clickCounter===3){
+        clickCounter=0;
+        const pass=prompt("🌻 Introduce el conjuro de Administrador:");
+        if(pass&&await hashText(pass)===SECRET_HASH){
+            document.getElementById('admin-modal').style.display='flex';
+        } else if(pass){
+            alert("🌻 Contraseña incorrecta.");
         }
     }
 });
-document.getElementById('close-modal-btn').addEventListener('click', () => {
-    document.getElementById('admin-modal').style.display = 'none';
+document.getElementById('close-modal-btn').addEventListener('click',()=>{
+    document.getElementById('admin-modal').style.display='none';
 });
-document.getElementById('product-detail-modal').addEventListener('click', function(e) {
-    if (e.target === this) cerrarProducto();
+document.getElementById('product-detail-modal').addEventListener('click',function(e){
+    if(e.target===this) cerrarProducto();
 });
 
-// CARRUSEL
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-if (slides.length > 0) {
-    setInterval(() => {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }, 4000);
-}
+// ── MOBILE MENU ──
+window.toggleMobile = function(){
+    const nav=document.getElementById('main-nav');
+    const ham=document.getElementById('hamburger');
+    nav.classList.toggle('open');
+    ham.classList.toggle('open');
+    document.body.style.overflow=nav.classList.contains('open')?'hidden':'';
+};
+window.closeMobile = function(){
+    document.getElementById('main-nav').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow='';
+};
 
-// NAVEGACIÓN SPA
-window.navigateTo = function(viewId) {
-    document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
-    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active-nav'));
-    const target = document.getElementById('view-'+viewId);
-    if (target) target.classList.add('active-view');
-    const btn = document.getElementById('nav-'+viewId);
-    if (btn) btn.classList.add('active-nav');
+// ── NAVEGACIÓN SPA ──
+window.navigateTo = function(viewId){
+    document.querySelectorAll('.view-section').forEach(s=>s.classList.remove('active-view'));
+    document.querySelectorAll('.nav-links a').forEach(l=>l.classList.remove('active-nav'));
+    const target=document.getElementById('view-'+viewId);
+    if(target) target.classList.add('active-view');
+    const btn=document.getElementById('nav-'+viewId);
+    if(btn) btn.classList.add('active-nav');
     window.scrollTo({top:0,behavior:'smooth'});
 };
 
+// ── INIT ──
 cargarProductosInicio();
+cargarCarrusel();
+cargarTestimonios();
 </script>
 </body>
 </html>
