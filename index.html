@@ -154,36 +154,23 @@
 
         /* ── CARRUSEL HERO ── */
         .carousel-section {
-            width:100%; height:440px; overflow:hidden; position:relative;
+            width:100%; height:520px; overflow:hidden; position:relative;
             background:var(--cream-dark);
         }
-        @media(max-width:600px){ .carousel-section { height:280px; } }
+        @media(max-width:900px){ .carousel-section { height:360px; } }
+        @media(max-width:600px){ .carousel-section { height:220px; } }
         .carousel-track { width:100%; height:100%; }
         .slide {
             width:100%; height:100%; display:none;
-            background-size:cover; background-position:center;
-            align-items:center; justify-content:center; flex-direction:column;
-            text-align:center; padding:20px; cursor:pointer;
-            position:relative;
+            position:relative; cursor:pointer; overflow:hidden;
         }
-        .slide::before {
-            content:''; position:absolute; inset:0;
-            background:linear-gradient(to bottom, rgba(61,48,24,0.15), rgba(61,48,24,0.55));
+        .slide.active { display:block; animation:fadeIn 0.7s ease; }
+        .slide img {
+            width:100%; height:100%;
+            object-fit:cover; object-position:center;
+            display:block;
         }
-        .slide.active { display:flex; animation:fadeIn 0.7s ease; }
-        .slide-content { position:relative; z-index:1; }
-        .slide-content h2 {
-            font-size:2.6rem; color:var(--white); font-weight:900;
-            text-shadow:0 3px 14px rgba(0,0,0,0.4); margin-bottom:10px;
-        }
-        .slide-content p {
-            font-size:1.2rem; color:var(--cream-dark); font-weight:500;
-            text-shadow:0 2px 8px rgba(0,0,0,0.35);
-        }
-        @media(max-width:600px){
-            .slide-content h2 { font-size:1.5rem; }
-            .slide-content p { font-size:0.95rem; }
-        }
+        .slide-content { display:none; }
         .carousel-dots {
             position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
             display:flex; gap:8px; z-index:5;
@@ -574,24 +561,7 @@
         </div>
 
         <div class="carousel-track" id="carousel-images">
-            <div class="slide active" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.7),rgba(122,92,30,0.7)),linear-gradient(45deg,#FFD966,#F5A623);">
-                <div class="slide-content">
-                    <h2>✨ Bienvenidos a Bella Vela</h2>
-                    <p>Creaciones artesanales que despiertan la imaginación y la magia</p>
-                </div>
-            </div>
-            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.65),rgba(100,74,20,0.7)),linear-gradient(45deg,#F5A623,#D4881A);">
-                <div class="slide-content">
-                    <h2>🕯️ Velas Místicas Únicas</h2>
-                    <p>Cada esencia cuenta una historia, cada rincón se llena de emoción</p>
-                </div>
-            </div>
-            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(122,92,30,0.65),rgba(61,48,24,0.7)),linear-gradient(45deg,#FFE9A0,#F5A623);">
-                <div class="slide-content">
-                    <h2>🌻 Pegatinas & Insumos</h2>
-                    <p>Todo lo que necesitás para crear tu propio universo mágico</p>
-                </div>
-            </div>
+            <!-- slides se cargan dinámicamente desde localStorage -->
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
     </div>
@@ -981,7 +951,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // ── CLOUDINARY ──
-const CLOUD_NAME   = "root";
+const CLOUD_NAME   = "aeab0aex";
 const UPLOAD_PRESET = "bella_vela_preset"; // Crear en cloudinary.com → Settings → Upload → Add Upload Preset → Unsigned
 
 async function subirImagen(file, onProgress) {
@@ -1029,21 +999,23 @@ let slidesData = [];
 function cargarCarrusel() {
     try { slidesData = JSON.parse(localStorage.getItem('bv_slides') || '[]'); } catch(e){ slidesData=[]; }
     const track = document.getElementById('carousel-images');
-    // Conservar slides hardcoded si no hay slides guardados
-    if(slidesData.length === 0) return initCarrusel();
-    // Agregar slides dinámicos
+    const section = document.querySelector('.carousel-section');
+    track.innerHTML = '';
+    // Si no hay slides, ocultar el carrusel completamente
+    if(slidesData.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+    section.style.display = 'block';
     slidesData.forEach(s => {
         const div = document.createElement('div');
         div.className = 'slide';
         div.setAttribute('data-link', s.link || '');
         if(s.imgUrl) {
-            div.style.backgroundImage = `linear-gradient(to bottom,rgba(61,48,24,0.18),rgba(61,48,24,0.58)),url('${s.imgUrl}')`;
-            div.style.backgroundSize = 'cover';
-            div.style.backgroundPosition = 'center';
+            div.innerHTML = `<img src="${s.imgUrl}" alt="${s.titulo||'slide'}">`;
         } else {
-            div.style.background = 'linear-gradient(135deg,rgba(122,92,30,0.7),rgba(61,48,24,0.8)),linear-gradient(45deg,#FFD966,#F5A623)';
+            div.style.background = 'linear-gradient(135deg,#FFD966,#F5A623)';
         }
-        div.innerHTML = `<div class="slide-content"><h2>${s.titulo||''}</h2><p>${s.subtitulo||''}</p></div>`;
         track.appendChild(div);
     });
     initCarrusel();
