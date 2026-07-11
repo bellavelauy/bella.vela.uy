@@ -537,6 +537,14 @@
                     </ul>
                 </li>
 
+                <li class="dropdown">
+                    <a onclick="filterCategory('jabones','','');closeMobile()"><i class="fas fa-soap"></i> Jabones <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="filterCategory('jabones','cosmeticos','');closeMobile()">Jabones Cosméticos</a></li>
+                        <li><a onclick="filterCategory('jabones','uso-diario','');closeMobile()">Jabones de Uso Diario</a></li>
+                    </ul>
+                </li>
+
                 <li><a onclick="navigateTo('souvenirs');closeMobile()" id="nav-souvenirs"><i class="fas fa-gift"></i> Souvenirs</a></li>
             </ul>
         </nav>
@@ -927,7 +935,7 @@
                 <p style="font-size:0.82rem;color:#c4a84a;margin-top:4px;">Juan Lacaze, Colonia — Uruguay</p>
             </div>
             <div class="footer-socials">
-                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/bellavela_uy/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1360,7 +1368,7 @@ const subcats = {
     velas:[['literatura-fantastica','Literatura Fantástica'],['sobrenatural','Sobrenatural'],['entidades-magicas','Entidades Mágicas']],
     pegatinas:[['sobres-sorpresa','Sobres Sorpresa'],['entidades-magicas','Entidades Mágicas'],['sobrenatural','Sobrenatural'],['literatura-fantastica','Literatura Fantástica']],
     insumos:[['ceras','Ceras'],['pabilos','Pabilos'],['esencias','Esencias'],['colorantes','Colorantes'],['laminas-miel','Láminas de Miel']],
-    jabones:[], souvenirs:[]
+    jabones:[['cosmeticos','Jabones Cosméticos'],['uso-diario','Jabones de Uso Diario']], souvenirs:[]
 };
 document.getElementById('prod-categoria').addEventListener('change',function(){
     const sel=document.getElementById('prod-subcategoria');
