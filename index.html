@@ -939,7 +939,7 @@
 <!-- ═══════════ FIREBASE + LÓGICA ═══════════ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, setDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ⚠️ REEMPLAZÁ apiKey y appId con los de Firebase Console → Configuración → Tus apps → Web
 const firebaseConfig = {
@@ -997,14 +997,18 @@ function aplicarLogo(url) {
 const logoGuardado = localStorage.getItem('bv_logo');
 if(logoGuardado) aplicarLogo(logoGuardado);
 
-// ── CARRUSEL (slides desde Firebase + localStorage) ──
+// ── CARRUSEL (slides en Firestore — funciona en todos los dispositivos) ──
 let slidesData = [];
-function cargarCarrusel() {
-    try { slidesData = JSON.parse(localStorage.getItem('bv_slides') || '[]'); } catch(e){ slidesData=[]; }
+
+async function cargarCarrusel() {
     const track = document.getElementById('carousel-images');
     const section = document.querySelector('.carousel-section');
     track.innerHTML = '';
-    // Si no hay slides, ocultar el carrusel completamente
+    try {
+        const snap = await getDocs(query(collection(db,'slides'), orderBy('orden','asc')));
+        slidesData = snap.docs.map(d => ({id:d.id,...d.data()}));
+    } catch(e) { slidesData = []; }
+
     if(slidesData.length === 0) {
         section.style.height = '0';
         section.style.overflow = 'hidden';
@@ -1012,12 +1016,13 @@ function cargarCarrusel() {
     }
     section.style.height = '';
     section.style.overflow = '';
+
     slidesData.forEach(s => {
         const div = document.createElement('div');
         div.className = 'slide';
         div.setAttribute('data-link', s.link || '');
         if(s.imgUrl) {
-            div.innerHTML = `<img src="${s.imgUrl}" alt="${s.titulo||'slide'}">`;
+            div.innerHTML = `<img src="${s.imgUrl}" alt="slide">`;
         } else {
             div.style.background = 'linear-gradient(135deg,#FFD966,#F5A623)';
         }
@@ -1033,11 +1038,11 @@ function initCarrusel() {
     slides.forEach((_, i) => {
         const btn = document.createElement('button');
         btn.className = 'carousel-dot' + (i===0?' active':'');
-        btn.onclick = () => goToSlide(i);
+        btn.onclick = () => window._carouselGo(i);
         dotsContainer.appendChild(btn);
     });
     let cur = 0;
-    window._carouselGo = function goToSlide(n) {
+    window._carouselGo = function(n) {
         slides[cur].classList.remove('active');
         document.querySelectorAll('.carousel-dot')[cur]?.classList.remove('active');
         cur = n;
@@ -1047,63 +1052,69 @@ function initCarrusel() {
     if(slides.length > 1) {
         setInterval(() => { const next=(cur+1)%slides.length; window._carouselGo(next); }, 5000);
     }
-    // Click en slide → navegar al link
     slides.forEach(slide => {
         slide.addEventListener('click', () => {
             const link = slide.getAttribute('data-link') || '';
             if(!link) return;
-            if(link.startsWith('cat:')) {
-                const cat = link.replace('cat:','');
-                filterCategory(cat,'','');
-            } else {
-                navigateTo(link);
-            }
+            if(link.startsWith('cat:')) filterCategory(link.replace('cat:',''),'','');
+            else navigateTo(link);
         });
     });
 }
 window.goToSlide = (n) => window._carouselGo && window._carouselGo(n);
 
 window.guardarSlide = async function() {
-    const titulo = document.getElementById('slide-titulo').value.trim();
+    const titulo    = document.getElementById('slide-titulo').value.trim();
     const subtitulo = document.getElementById('slide-subtitulo').value.trim();
-    const link = document.getElementById('slide-link').value;
-    const file = document.getElementById('slide-img').files[0];
-    const prog = document.getElementById('slide-progress');
-    const fill = document.getElementById('slide-progress-fill');
+    const link      = document.getElementById('slide-link').value;
+    const file      = document.getElementById('slide-img').files[0];
+    const prog   = document.getElementById('slide-progress');
+    const fill   = document.getElementById('slide-progress-fill');
     const status = document.getElementById('slide-status');
+    if(!file) return alert('Seleccioná una imagen para el slide.');
     prog.style.display = 'block';
-    let imgUrl = '';
     try {
-        if(file) {
-            status.textContent = 'Subiendo imagen...';
-            imgUrl = await subirImagen(file, p => { fill.style.width=p+'%'; });
-        }
-        slidesData.push({ titulo, subtitulo, link, imgUrl });
-        localStorage.setItem('bv_slides', JSON.stringify(slidesData));
-        fill.style.width='100%'; status.textContent='✅ Slide guardado! Recargá la página para verlo.';
-        cargarSlidesAdmin();
-    } catch(e) { status.textContent='❌ Error: '+e.message; }
+        status.textContent = 'Subiendo imagen...';
+        const imgUrl = await subirImagen(file, p => { fill.style.width=p+'%'; status.textContent=`Subiendo... ${p}%`; });
+        fill.style.width = '90%'; status.textContent = 'Guardando en Firebase...';
+        await addDoc(collection(db,'slides'), {
+            titulo, subtitulo, link, imgUrl,
+            orden: Date.now()
+        });
+        fill.style.width = '100%'; status.textContent = '✅ Slide guardado!';
+        document.getElementById('slide-titulo').value = '';
+        document.getElementById('slide-subtitulo').value = '';
+        document.getElementById('slide-img').value = '';
+        await cargarCarrusel();
+        await cargarSlidesAdmin();
+    } catch(e) { status.textContent = '❌ Error: ' + e.message; console.error(e); }
 };
 
-function cargarSlidesAdmin() {
+async function cargarSlidesAdmin() {
     const lista = document.getElementById('slide-list-admin');
-    if(!slidesData.length){ lista.innerHTML='<p style="font-size:0.85rem;color:#aaa;">No hay slides agregados aún.</p>'; return; }
-    lista.innerHTML = slidesData.map((s,i) => `
-        <div class="carousel-item-admin">
-            ${s.imgUrl ? `<img src="${s.imgUrl}" alt="slide">` : '<div style="width:80px;height:50px;background:var(--cream-dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🖼</div>'}
-            <div class="info">
-                <strong>${s.titulo||'Sin título'}</strong>
-                <span>${s.subtitulo||''} ${s.link?'| → '+s.link:''}</span>
+    lista.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+    try {
+        const snap = await getDocs(query(collection(db,'slides'), orderBy('orden','asc')));
+        const slides = snap.docs.map(d => ({id:d.id,...d.data()}));
+        if(!slides.length) { lista.innerHTML='<p style="font-size:0.85rem;color:#aaa;">No hay slides aún.</p>'; return; }
+        lista.innerHTML = slides.map(s => `
+            <div class="carousel-item-admin">
+                ${s.imgUrl ? `<img src="${s.imgUrl}" alt="slide">` : '<div style="width:80px;height:50px;background:var(--cream-dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🖼</div>'}
+                <div class="info">
+                    <strong>${s.titulo||'Sin título'}</strong>
+                    <span>${s.link?'→ '+s.link:''}</span>
+                </div>
+                <button class="btn-delete" onclick="eliminarSlide('${s.id}')">🗑</button>
             </div>
-            <button class="btn-delete" onclick="eliminarSlide(${i})">🗑</button>
-        </div>
-    `).join('');
+        `).join('');
+    } catch(e) { lista.innerHTML='<p style="color:#c00;font-size:0.85rem;">Error: '+e.message+'</p>'; }
 }
-window.eliminarSlide = function(i) {
+
+window.eliminarSlide = async function(id) {
     if(!confirm('¿Eliminar este slide?')) return;
-    slidesData.splice(i,1);
-    localStorage.setItem('bv_slides', JSON.stringify(slidesData));
-    cargarSlidesAdmin();
+    await deleteDoc(doc(db,'slides',id));
+    await cargarCarrusel();
+    await cargarSlidesAdmin();
 };
 
 // ── TESTIMONIOS ──
