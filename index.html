@@ -88,53 +88,39 @@
         }
 
         /* ── DROPDOWNS DESKTOP ── */
-        /* ── DROPDOWNS: técnica padding-top para evitar gap ── */
-        /* El li tiene padding-top invisible que "conecta" el link con el menú */
         .dropdown-menu {
-            display:none; position:absolute; top:100%; left:0;
+            display:none; position:absolute; top:calc(100% + 4px); left:0;
             background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
             border-radius:12px; padding:8px 0; min-width:210px; list-style:none;
             border-top:3px solid var(--gold); animation:slideUp 0.25s ease; z-index:500;
-            /* padding superior extra = zona de "aterrizaje" del mouse */
-            padding-top:6px;
         }
         .dropdown-menu li { position:relative; }
         .dropdown-menu a { border-radius:0; padding:10px 18px; font-weight:500; font-size:0.9rem; }
         .dropdown-menu a:hover { background:var(--cream-dark); color:var(--gold-dark); }
         .dropdown-menu li:hover > .submenu-right { display:block; }
         .submenu-right {
-            display:none; position:absolute; top:-6px; left:100%;
+            display:none; position:absolute; top:0; left:100%;
             background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
             border-radius:12px; padding:8px 0; min-width:200px; list-style:none;
             border-left:3px solid var(--gold-light); z-index:501;
-        }
-        /* Puente invisible lateral para llegar al submenu sin que se cierre */
-        .dropdown-menu li::before {
-            content:''; position:absolute; top:0; left:100%;
-            width:20px; height:100%; background:transparent; z-index:400;
         }
 
         /* ── MEGA MENÚ VELAS ── */
         .velas-mega-wrap { position:static; }
         .velas-top-menu {
-            display:none; position:absolute; top:100%; left:-20px;
+            display:none; position:absolute; top:calc(100% + 4px); left:-20px;
             background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
-            border-radius:12px; padding:6px 0 8px; min-width:230px; list-style:none;
+            border-radius:12px; padding:8px 0; min-width:230px; list-style:none;
             border-top:3px solid var(--gold); animation:slideUp 0.25s ease; z-index:500;
         }
         .velas-top-menu li { position:relative; }
         .velas-top-menu > li > a {
-            border-radius:0; padding:11px 18px 11px 14px; font-weight:600; font-size:0.93rem;
+            border-radius:0; padding:11px 18px; font-weight:600; font-size:0.93rem;
             display:flex; justify-content:space-between; align-items:center;
         }
         .velas-top-menu > li > a:hover { background:var(--cream-dark); color:var(--gold-dark); }
-        /* Puente invisible lateral: cubre el espacio entre la categoría y el subpanel */
-        .velas-top-menu > li::before {
-            content:''; position:absolute; top:0; left:100%;
-            width:20px; height:100%; background:transparent; z-index:400;
-        }
         .velas-sub-panel {
-            display:none; position:absolute; top:-6px; left:100%;
+            display:none; position:absolute; top:0; left:100%;
             background:var(--white); box-shadow:0 8px 28px var(--shadow-dark);
             border-radius:12px; padding:14px 16px; min-width:220px; list-style:none;
             border-left:3px solid var(--gold-light); z-index:502;
@@ -154,26 +140,36 @@
 
         /* ── CARRUSEL HERO ── */
         .carousel-section {
-            width:100%; height:520px; overflow:hidden; position:relative;
+            width:100%; height:440px; overflow:hidden; position:relative;
             background:var(--cream-dark);
         }
-        @media(max-width:900px){ .carousel-section { height:360px !important; } }
-        @media(max-width:600px){ .carousel-section { height:56vw !important; min-height:180px; } }
+        @media(max-width:600px){ .carousel-section { height:280px; } }
         .carousel-track { width:100%; height:100%; }
         .slide {
             width:100%; height:100%; display:none;
-            position:relative; cursor:pointer; overflow:hidden;
+            background-size:cover; background-position:center;
+            align-items:center; justify-content:center; flex-direction:column;
+            text-align:center; padding:20px; cursor:pointer;
+            position:relative;
         }
-        .slide.active { display:block; animation:fadeIn 0.7s ease; }
-        .slide img {
-            width:100%; height:100%;
-            object-fit:cover; object-position:center;
-            display:block; pointer-events:none;
+        .slide::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(to bottom, rgba(61,48,24,0.15), rgba(61,48,24,0.55));
+        }
+        .slide.active { display:flex; animation:fadeIn 0.7s ease; }
+        .slide-content { position:relative; z-index:1; }
+        .slide-content h2 {
+            font-size:2.6rem; color:var(--white); font-weight:900;
+            text-shadow:0 3px 14px rgba(0,0,0,0.4); margin-bottom:10px;
+        }
+        .slide-content p {
+            font-size:1.2rem; color:var(--cream-dark); font-weight:500;
+            text-shadow:0 2px 8px rgba(0,0,0,0.35);
         }
         @media(max-width:600px){
-            .slide img { object-fit:cover; width:100%; height:100%; }
+            .slide-content h2 { font-size:1.5rem; }
+            .slide-content p { font-size:0.95rem; }
         }
-        .slide-content { display:none; }
         .carousel-dots {
             position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
             display:flex; gap:8px; z-index:5;
@@ -452,87 +448,18 @@
                     </ul>
                 </li>
 
-                <!-- VELAS: click va al listado, hover muestra 3 categorías -->
-                <li class="velas-mega-wrap">
-                    <a onclick="filterCategory('velas','','');closeMobile()"><i class="fas fa-fire"></i> Velas <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
-                    <ul class="velas-top-menu">
-                        <li>
-                            <a>🏰 Literatura Fantástica <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
-                            <ul class="velas-sub-panel">
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Escuela de Magia');closeMobile()">Escuela de Magia</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Biblioteca');closeMobile()">Biblioteca</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Pociones');closeMobile()">Pociones</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Bosque Prohibido');closeMobile()">Bosque Prohibido</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Sala Común');closeMobile()">Sala Común</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Hechizos');closeMobile()">Hechizos</a></li>
-                                <li><a onclick="filterCategory('velas','literatura-fantastica','Torneo de Magia');closeMobile()">Torneo de Magia</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>🧛 Sobrenatural <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
-                            <ul class="velas-sub-panel">
-                                <li><a onclick="filterCategory('velas','sobrenatural','Vampiro');closeMobile()">Vampiro</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Hombre Lobo');closeMobile()">Hombre Lobo</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Fantasma');closeMobile()">Fantasma</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Bruja');closeMobile()">Bruja</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Demonio');closeMobile()">Demonio</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Ángel');closeMobile()">Ángel</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Zombie');closeMobile()">Zombie</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Fénix');closeMobile()">Fénix</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Pegaso');closeMobile()">Pegaso</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Grifo');closeMobile()">Grifo</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Sabueso');closeMobile()">Sabueso</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Hidra');closeMobile()">Hidra</a></li>
-                                <li><a onclick="filterCategory('velas','sobrenatural','Minotauro');closeMobile()">Minotauro</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>🧚 Entidades Mágicas <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i></a>
-                            <ul class="velas-sub-panel">
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Hada');closeMobile()">Hada</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Duende');closeMobile()">Duende</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Elfo');closeMobile()">Elfo</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Ninfa');closeMobile()">Ninfa</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Sirena');closeMobile()">Sirena</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Unicornio');closeMobile()">Unicornio</a></li>
-                                <li><a onclick="filterCategory('velas','entidades-magicas','Dragón');closeMobile()">Dragón</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <li>
+                    <a onclick="filterCategory('velas','','');closeMobile()"><i class="fas fa-fire"></i> Velas</a>
                 </li>
 
-                <li class="dropdown">
-                    <a onclick="filterCategory('pegatinas','','');closeMobile()"><i class="fas fa-sticky-note"></i> Pegatinas <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="filterCategory('pegatinas','sobres-sorpresa','');closeMobile()">Sobres Sorpresa</a></li>
-                        <li>
-                            <a>Colecciones <i class="fas fa-chevron-right" style="font-size:0.6rem;float:right;margin-top:4px;"></i></a>
-                            <ul class="submenu-right">
-                                <li><a onclick="filterCategory('pegatinas','entidades-magicas','');closeMobile()">Entidades Mágicas</a></li>
-                                <li><a onclick="filterCategory('pegatinas','sobrenatural','');closeMobile()">Sobrenatural</a></li>
-                                <li><a onclick="filterCategory('pegatinas','literatura-fantastica','');closeMobile()">Literatura Fantástica</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <li>
+                    <a onclick="filterCategory('pegatinas','','');closeMobile()"><i class="fas fa-sticky-note"></i> Papelería</a>
                 </li>
 
-                <li class="dropdown">
-                    <a onclick="filterCategory('insumos','','');closeMobile()"><i class="fas fa-box-open"></i> Insumos <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="filterCategory('insumos','ceras','');closeMobile()">Ceras</a></li>
-                        <li><a onclick="filterCategory('insumos','pabilos','');closeMobile()">Pabilos</a></li>
-                        <li><a onclick="filterCategory('insumos','esencias','');closeMobile()">Esencias</a></li>
-                        <li><a onclick="filterCategory('insumos','colorantes','');closeMobile()">Colorantes</a></li>
-                        <li><a onclick="filterCategory('insumos','laminas-miel','');closeMobile()">Láminas de Miel</a></li>
-                    </ul>
-                </li>
 
-                <li class="dropdown">
-                    <a onclick="filterCategory('jabones','','');closeMobile()"><i class="fas fa-soap"></i> Jabones <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="filterCategory('jabones','cosmeticos','');closeMobile()">Jabones Cosméticos</a></li>
-                        <li><a onclick="filterCategory('jabones','uso-diario','');closeMobile()">Jabones de Uso Diario</a></li>
-                    </ul>
+
+                <li>
+                    <a onclick="filterCategory('jabones','','');closeMobile()"><i class="fas fa-soap"></i> Jabones</a>
                 </li>
 
                 <li><a onclick="navigateTo('souvenirs');closeMobile()" id="nav-souvenirs"><i class="fas fa-gift"></i> Souvenirs</a></li>
@@ -564,7 +491,24 @@
         </div>
 
         <div class="carousel-track" id="carousel-images">
-            <!-- slides se cargan dinámicamente desde localStorage -->
+            <div class="slide active" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.7),rgba(122,92,30,0.7)),linear-gradient(45deg,#FFD966,#F5A623);">
+                <div class="slide-content">
+                    <h2>✨ Bienvenidos a Bella Vela</h2>
+                    <p>Creaciones artesanales que despiertan la imaginación y la magia</p>
+                </div>
+            </div>
+            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(61,48,24,0.65),rgba(100,74,20,0.7)),linear-gradient(45deg,#F5A623,#D4881A);">
+                <div class="slide-content">
+                    <h2>🕯️ Velas Místicas Únicas</h2>
+                    <p>Cada esencia cuenta una historia, cada rincón se llena de emoción</p>
+                </div>
+            </div>
+            <div class="slide" data-link="" style="background:linear-gradient(135deg,rgba(122,92,30,0.65),rgba(61,48,24,0.7)),linear-gradient(45deg,#FFE9A0,#F5A623);">
+                <div class="slide-content">
+                    <h2>🌻 Pegatinas & Insumos</h2>
+                    <p>Todo lo que necesitás para crear tu propio universo mágico</p>
+                </div>
+            </div>
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
     </div>
@@ -760,8 +704,7 @@
             <select id="prod-categoria">
                 <option value="">-- Categoría *</option>
                 <option value="velas">🕯️ Velas</option>
-                <option value="pegatinas">🩹 Pegatinas</option>
-                <option value="insumos">📦 Insumos</option>
+                <option value="pegatinas">🩹 Papelería</option>
                 <option value="jabones">🧼 Jabones</option>
                 <option value="souvenirs">🎁 Souvenirs</option>
             </select>
@@ -908,7 +851,7 @@
                 <p style="font-size:0.82rem;color:#c4a84a;margin-top:4px;">Juan Lacaze, Colonia — Uruguay</p>
             </div>
             <div class="footer-socials">
-                <a href="https://www.instagram.com/bellavela_uy/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -939,7 +882,7 @@
 <!-- ═══════════ FIREBASE + LÓGICA ═══════════ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, setDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ⚠️ REEMPLAZÁ apiKey y appId con los de Firebase Console → Configuración → Tus apps → Web
 const firebaseConfig = {
@@ -1008,24 +951,16 @@ async function cargarCarrusel() {
         const snap = await getDocs(query(collection(db,'slides'), orderBy('orden','asc')));
         slidesData = snap.docs.map(d => ({id:d.id,...d.data()}));
     } catch(e) { slidesData = []; }
-
     if(slidesData.length === 0) {
-        section.style.height = '0';
-        section.style.overflow = 'hidden';
-        return;
+        section.style.height = '0'; section.style.overflow = 'hidden'; return;
     }
-    section.style.height = '';
-    section.style.overflow = '';
-
+    section.style.height = ''; section.style.overflow = '';
     slidesData.forEach(s => {
         const div = document.createElement('div');
         div.className = 'slide';
         div.setAttribute('data-link', s.link || '');
-        if(s.imgUrl) {
-            div.innerHTML = `<img src="${s.imgUrl}" alt="slide">`;
-        } else {
-            div.style.background = 'linear-gradient(135deg,#FFD966,#F5A623)';
-        }
+        if(s.imgUrl) div.innerHTML = `<img src="${s.imgUrl}" alt="slide">`;
+        else div.style.background = 'linear-gradient(135deg,#FFD966,#F5A623)';
         track.appendChild(div);
     });
     initCarrusel();
@@ -1045,13 +980,10 @@ function initCarrusel() {
     window._carouselGo = function(n) {
         slides[cur].classList.remove('active');
         document.querySelectorAll('.carousel-dot')[cur]?.classList.remove('active');
-        cur = n;
-        slides[cur].classList.add('active');
+        cur = n; slides[cur].classList.add('active');
         document.querySelectorAll('.carousel-dot')[cur]?.classList.add('active');
     };
-    if(slides.length > 1) {
-        setInterval(() => { const next=(cur+1)%slides.length; window._carouselGo(next); }, 5000);
-    }
+    if(slides.length > 1) setInterval(() => window._carouselGo((cur+1)%slides.length), 5000);
     slides.forEach(slide => {
         slide.addEventListener('click', () => {
             const link = slide.getAttribute('data-link') || '';
@@ -1068,53 +1000,41 @@ window.guardarSlide = async function() {
     const subtitulo = document.getElementById('slide-subtitulo').value.trim();
     const link      = document.getElementById('slide-link').value;
     const file      = document.getElementById('slide-img').files[0];
-    const prog   = document.getElementById('slide-progress');
-    const fill   = document.getElementById('slide-progress-fill');
-    const status = document.getElementById('slide-status');
+    const prog=document.getElementById('slide-progress'), fill=document.getElementById('slide-progress-fill'), status=document.getElementById('slide-status');
     if(!file) return alert('Seleccioná una imagen para el slide.');
-    prog.style.display = 'block';
+    prog.style.display='block';
     try {
-        status.textContent = 'Subiendo imagen...';
-        const imgUrl = await subirImagen(file, p => { fill.style.width=p+'%'; status.textContent=`Subiendo... ${p}%`; });
-        fill.style.width = '90%'; status.textContent = 'Guardando en Firebase...';
-        await addDoc(collection(db,'slides'), {
-            titulo, subtitulo, link, imgUrl,
-            orden: Date.now()
-        });
-        fill.style.width = '100%'; status.textContent = '✅ Slide guardado!';
-        document.getElementById('slide-titulo').value = '';
-        document.getElementById('slide-subtitulo').value = '';
-        document.getElementById('slide-img').value = '';
-        await cargarCarrusel();
-        await cargarSlidesAdmin();
-    } catch(e) { status.textContent = '❌ Error: ' + e.message; console.error(e); }
+        status.textContent='Subiendo imagen...';
+        const imgUrl = await subirImagen(file, p=>{ fill.style.width=p+'%'; status.textContent='Subiendo... '+p+'%'; });
+        fill.style.width='90%'; status.textContent='Guardando en Firebase...';
+        await addDoc(collection(db,'slides'),{ titulo, subtitulo, link, imgUrl, orden:Date.now() });
+        fill.style.width='100%'; status.textContent='✅ Slide guardado!';
+        document.getElementById('slide-titulo').value='';
+        document.getElementById('slide-subtitulo').value='';
+        document.getElementById('slide-img').value='';
+        await cargarCarrusel(); await cargarSlidesAdmin();
+    } catch(e) { status.textContent='❌ Error: '+e.message; console.error(e); }
 };
 
 async function cargarSlidesAdmin() {
-    const lista = document.getElementById('slide-list-admin');
-    lista.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+    const lista=document.getElementById('slide-list-admin');
+    lista.innerHTML='<div class="loading-spinner"><div class="spinner"></div></div>';
     try {
-        const snap = await getDocs(query(collection(db,'slides'), orderBy('orden','asc')));
-        const slides = snap.docs.map(d => ({id:d.id,...d.data()}));
-        if(!slides.length) { lista.innerHTML='<p style="font-size:0.85rem;color:#aaa;">No hay slides aún.</p>'; return; }
-        lista.innerHTML = slides.map(s => `
+        const snap=await getDocs(query(collection(db,'slides'),orderBy('orden','asc')));
+        const slides=snap.docs.map(d=>({id:d.id,...d.data()}));
+        if(!slides.length){ lista.innerHTML='<p style="font-size:0.85rem;color:#aaa;">No hay slides aún.</p>'; return; }
+        lista.innerHTML=slides.map(s=>`
             <div class="carousel-item-admin">
-                ${s.imgUrl ? `<img src="${s.imgUrl}" alt="slide">` : '<div style="width:80px;height:50px;background:var(--cream-dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🖼</div>'}
-                <div class="info">
-                    <strong>${s.titulo||'Sin título'}</strong>
-                    <span>${s.link?'→ '+s.link:''}</span>
-                </div>
+                ${s.imgUrl?`<img src="${s.imgUrl}" alt="slide">`:'<div style="width:80px;height:50px;background:var(--cream-dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🖼</div>'}
+                <div class="info"><strong>${s.titulo||'Sin título'}</strong><span>${s.link?'→ '+s.link:''}</span></div>
                 <button class="btn-delete" onclick="eliminarSlide('${s.id}')">🗑</button>
-            </div>
-        `).join('');
-    } catch(e) { lista.innerHTML='<p style="color:#c00;font-size:0.85rem;">Error: '+e.message+'</p>'; }
+            </div>`).join('');
+    } catch(e){ lista.innerHTML='<p style="color:#c00;font-size:0.85rem;">Error: '+e.message+'</p>'; }
 }
-
-window.eliminarSlide = async function(id) {
+window.eliminarSlide = async function(id){
     if(!confirm('¿Eliminar este slide?')) return;
     await deleteDoc(doc(db,'slides',id));
-    await cargarCarrusel();
-    await cargarSlidesAdmin();
+    await cargarCarrusel(); await cargarSlidesAdmin();
 };
 
 // ── TESTIMONIOS ──
@@ -1234,7 +1154,7 @@ async function cargarProductosInicio() {
     }
 }
 function getCategoryEmoji(cat){ return {velas:'🕯️',pegatinas:'🩹',insumos:'📦',jabones:'🧼',souvenirs:'🎁'}[cat]||'🌻'; }
-function getCategoryLabel(cat){ return {velas:'Velas',pegatinas:'Pegatinas',insumos:'Insumos',jabones:'Jabones',souvenirs:'Souvenirs'}[cat]||cat; }
+function getCategoryLabel(cat){ return {velas:'Velas',pegatinas:'Papelería',insumos:'Insumos',jabones:'Jabones',souvenirs:'Souvenirs'}[cat]||cat; }
 
 function renderGrid(container, productos) {
     if(!productos.length){
@@ -1260,13 +1180,8 @@ window.filterCategory = function(cat, subcat, item) {
     let filtrados = todosLosProductos.filter(p=>!cat||p.categoria===cat);
     if(subcat) filtrados=filtrados.filter(p=>p.subcategoria===subcat);
     if(item) filtrados=filtrados.filter(p=>p.subcategoria===item||p.nombre.includes(item));
-    let titulo='🌟 ';
-    if(cat==='velas') titulo+='🕯️ Velas';
-    else if(cat==='pegatinas') titulo+='🩹 Pegatinas';
-    else if(cat==='insumos') titulo+='📦 Insumos';
-    if(subcat) titulo+=' — '+subcat.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
-    if(item) titulo+=' · '+item;
-    document.getElementById('catalog-filter-header').textContent=titulo;
+    const titulos={velas:'🕯️ Velas',pegatinas:'🩹 Papelería',jabones:'🧼 Jabones',souvenirs:'🎁 Souvenirs'};
+    document.getElementById('catalog-filter-header').textContent=titulos[cat]||'🌟 Productos';
     renderGrid(document.getElementById('products-grid-filter'), filtrados);
     navigateTo('catalogo-filtrado');
 };
@@ -1356,7 +1271,7 @@ const subcats = {
     velas:[['literatura-fantastica','Literatura Fantástica'],['sobrenatural','Sobrenatural'],['entidades-magicas','Entidades Mágicas']],
     pegatinas:[['sobres-sorpresa','Sobres Sorpresa'],['entidades-magicas','Entidades Mágicas'],['sobrenatural','Sobrenatural'],['literatura-fantastica','Literatura Fantástica']],
     insumos:[['ceras','Ceras'],['pabilos','Pabilos'],['esencias','Esencias'],['colorantes','Colorantes'],['laminas-miel','Láminas de Miel']],
-    jabones:[['cosmeticos','Jabones Cosméticos'],['uso-diario','Jabones de Uso Diario']], souvenirs:[]
+    jabones:[], souvenirs:[]
 };
 document.getElementById('prod-categoria').addEventListener('change',function(){
     const sel=document.getElementById('prod-subcategoria');
